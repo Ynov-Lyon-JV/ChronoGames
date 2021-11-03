@@ -7,6 +7,9 @@ public class CarCam : MonoBehaviour
     Transform car;
     Rigidbody carPhysics;
 
+    Animator cameraAnimator;
+    Camera camera;
+
     [Tooltip("If car speed is below this value, then the camera will default to looking forwards.")]
     public float rotationThreshold = 1f;
     
@@ -16,14 +19,19 @@ public class CarCam : MonoBehaviour
     [Tooltip("How closely the camera matches the car's velocity vector. The lower the value, the smoother the camera rotations, but too much results in not being able to see where you're going.")]
     public float cameraRotationSpeed = 5.0f;
 
+    float previousMagnitude = 0;
+
     void Start()
     {
-        carCam = Camera.main.GetComponent<Transform>();
+        camera = Camera.main;
+        carCam = camera.GetComponent<Transform>();
         rootNode = GetComponent<Transform>();
         car = rootNode.parent.GetComponent<Transform>();
         carPhysics = car.GetComponent<Rigidbody>();
         // Detach the camera so that it can move freely on its own.
         rootNode.parent = null;
+
+        cameraAnimator = transform.GetChild(0).GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -42,5 +50,13 @@ public class CarCam : MonoBehaviour
         // Rotate the camera towards the velocity vector.
         look = Quaternion.Slerp(rootNode.rotation, look, cameraRotationSpeed * Time.fixedDeltaTime);                
         rootNode.rotation = look;
+
+        float Magnitude = carPhysics.velocity.magnitude;
+        cameraAnimator.SetFloat("ConstantShake", Magnitude / 120);
+
+        if (Magnitude - previousMagnitude < -5)
+            cameraAnimator.SetTrigger("Hit");
+
+        previousMagnitude = Magnitude;
     }
 }
