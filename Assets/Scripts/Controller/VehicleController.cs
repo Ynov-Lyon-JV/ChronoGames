@@ -35,6 +35,8 @@ public class VehicleController : MonoBehaviour
     public float kph;
     public float smoothTime;
     public float maxRPM, minRPM;
+    public AnimationCurve CoefRotationOverSpeed;
+    public float CoefRotation;
     public float wheelsRPM;
     public float engineRPM;
     public bool isReverse = false;
@@ -136,17 +138,21 @@ public class VehicleController : MonoBehaviour
 
     private void SteerVehicle()
     {
+        CoefRotation = CoefRotationOverSpeed.Evaluate(Mathf.Clamp(kph / 200, 0, 1));
+
+        float newInput = im.HorizontalInput * CoefRotation;
+
         if (isFrontDir)
         {
-            if (im.HorizontalInput > 0)
+            if (newInput > 0)
             {
-                wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * im.HorizontalInput;
-                wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * im.HorizontalInput;
+                wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * newInput;
+                wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * newInput;
             }
-            else if (im.HorizontalInput < 0)
+            else if (newInput < 0)
             {
-                wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * im.HorizontalInput;
-                wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * im.HorizontalInput;
+                wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * newInput;
+                wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * newInput;
             }
             else
             {
@@ -156,15 +162,15 @@ public class VehicleController : MonoBehaviour
         }
         else
         {
-            if (im.HorizontalInput > 0)
+            if (newInput > 0)
             {
-                wheels[2].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * -im.HorizontalInput;
-                wheels[3].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * -im.HorizontalInput;
+                wheels[2].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * -newInput;
+                wheels[3].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * -newInput;
             }
-            else if (im.HorizontalInput < 0)
+            else if (newInput < 0)
             {
-                wheels[2].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * -im.HorizontalInput;
-                wheels[3].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * -im.HorizontalInput;
+                wheels[2].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * -newInput;
+                wheels[3].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * -newInput;
             }
             else
             {
@@ -292,7 +298,7 @@ public class VehicleController : MonoBehaviour
 
     private void AdjustTraction()
     {
-        //time it takes to go from normal drive to drift 
+        //tine it takes to go from normal drive to drift 
         float driftSmothFactor = .7f * Time.deltaTime;
 
         if (im.IsHandbrake || im.IsHandbrakeController)
@@ -316,12 +322,18 @@ public class VehicleController : MonoBehaviour
                 wheels[i].sidewaysFriction = sidewaysFriction;
                 wheels[i].forwardFriction = forwardFriction;
             }
-            GetComponent<Rigidbody>().AddForce(transform.forward * (kph / 400) * 10000);
+
+            float multiplier = 0;
+            if (im.HorizontalInput != 0)
+                multiplier = 1;
+            else
+                multiplier = 0;
+
+            GetComponent<Rigidbody>().AddForce(transform.forward * (kph / 400) * 12000 * multiplier);
         }
         //executed when handbrake is being held
         else
         {
-
             forwardFriction = wheels[0].forwardFriction;
             sidewaysFriction = wheels[0].sidewaysFriction;
 
