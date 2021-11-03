@@ -292,7 +292,7 @@ public class VehicleController : MonoBehaviour
 
     private void AdjustTraction()
     {
-        //tine it takes to go from normal drive to drift 
+        //time it takes to go from normal drive to drift 
         float driftSmothFactor = .7f * Time.deltaTime;
 
         if (im.IsHandbrake || im.IsHandbrakeController)
