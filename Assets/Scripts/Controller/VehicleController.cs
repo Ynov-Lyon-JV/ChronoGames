@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ public class VehicleController : MonoBehaviour
     [Header("Variables")]
     public float handBrakeFrictionMultiplier = 2f;
     public bool isFrontDir = true;
-    public float kph;
+    public int kph;
     public float smoothTime;
     public float maxRPM, minRPM;
     public AnimationCurve CoefRotationOverSpeed;
@@ -150,8 +151,8 @@ void FixedUpdate()
                 }
                 break;
         }
-
-        kph = rb.velocity.magnitude * 3.6f;
+       
+        kph = (int) Math.Round(rb.velocity.magnitude * 3.6f, MidpointRounding.AwayFromZero);
     }
 
     private void BrakeVehicle()
@@ -272,7 +273,7 @@ void FixedUpdate()
             r++;
         }
 
-        wheelsRPM = (r != 0) ? sum / r : 0;
+        wheelsRPM = (r != 0) ? (int) sum / r : 0;
 
         if (wheelsRPM < 0 && !isReverse)
         {

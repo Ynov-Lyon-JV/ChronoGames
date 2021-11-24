@@ -142,9 +142,9 @@ public class DisplayData : MonoBehaviour
     /// Updates the display of the speed
     /// </summary>
     /// <param name="_speed">The current speed the player has</param>
-    public void UpdateSpeed(float _speed)
+    public void UpdateSpeed(int _speed)
     {
-        speedText.text = $"{FormatTwoDigits(_speed)} km/h";
+        speedText.text = $"{_speed} km/h";
     }
 
     public void UpdateGear(bool isReverse, int gearNum)

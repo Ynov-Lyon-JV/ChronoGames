@@ -5717,11 +5717,11 @@ MonoBehaviour:
   gearboxType: 0
   totalPower: 0
   gears:
-  - 50
-  - 40
-  - 30
-  - 0.9
-  - 0.4
+  - 1.8
+  - 1.5
+  - 1.3
+  - 1.3
+  - 1.2
   gearChangeSpeed:
   - 40
   - 85
