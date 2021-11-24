@@ -299,7 +299,7 @@ WheelCollider:
     spring: 90000
     damper: 9000
     targetPosition: 1
-  m_SuspensionDistance: 0.1
+  m_SuspensionDistance: 0.05
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -369,7 +369,7 @@ WheelCollider:
     spring: 90000
     damper: 9000
     targetPosition: 1
-  m_SuspensionDistance: 0.1
+  m_SuspensionDistance: 0.05
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -521,7 +521,7 @@ WheelCollider:
     spring: 90000
     damper: 9000
     targetPosition: 1
-  m_SuspensionDistance: 0.1
+  m_SuspensionDistance: 0.05
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -673,7 +673,7 @@ WheelCollider:
     spring: 90000
     damper: 9000
     targetPosition: 1
-  m_SuspensionDistance: 0.1
+  m_SuspensionDistance: 0.05
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25

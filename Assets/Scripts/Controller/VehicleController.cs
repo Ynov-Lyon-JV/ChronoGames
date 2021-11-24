@@ -58,6 +58,7 @@ public class VehicleController : MonoBehaviour
 
     [Header("DEBUG")]
     public float[] slip = new float[4];
+    float DriftMultiplier = 0;
     #endregion
 
     #region Coroutines
@@ -339,6 +340,8 @@ void FixedUpdate()
 
         if (im.IsHandbrake || im.IsHandbrakeController)
         {
+            DriftMultiplier += Time.deltaTime /10;
+
            
             StartSmokeOnDrift();
 
@@ -347,6 +350,9 @@ void FixedUpdate()
 
             float velocity = 0;
             sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = forwardFriction.extremumValue = forwardFriction.asymptoteValue = Mathf.SmoothDamp(forwardFriction.asymptoteValue, driftFactor * handBrakeFrictionMultiplier, ref velocity, driftSmothFactor);
+
+            sidewaysFriction.stiffness -= 0.01f;
+            sidewaysFriction.stiffness = Mathf.Clamp(sidewaysFriction.stiffness, 0.2f, 1f);
 
             for (int i = 0; i < 4; i++)
             {
@@ -368,7 +374,7 @@ void FixedUpdate()
             else
                 multiplier = 0;
 
-            GetComponent<Rigidbody>().AddForce(transform.forward * (kph / 400) * 12000 * multiplier);
+            //GetComponent<Rigidbody>().AddForce(transform.forward * (kph / 400) * 12000 * multiplier * DriftMultiplier);
         }
         //executed when handbrake is being held
         else
@@ -377,6 +383,9 @@ void FixedUpdate()
 
             forwardFriction = wheels[0].forwardFriction;
             sidewaysFriction = wheels[0].sidewaysFriction;
+
+            sidewaysFriction.stiffness += 0.01f;
+            sidewaysFriction.stiffness = Mathf.Clamp(sidewaysFriction.stiffness, 0.2f, 1f);
 
             forwardFriction.extremumValue = forwardFriction.asymptoteValue = sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue =
                 ((kph * handBrakeFrictionMultiplier) / 300) + 1;
@@ -387,6 +396,9 @@ void FixedUpdate()
                 wheels[i].sidewaysFriction = sidewaysFriction;
 
             }
+
+            if (DriftMultiplier != 0)
+                DriftMultiplier = 0;
         }
 
         //checks the amount of slip to control the drift
