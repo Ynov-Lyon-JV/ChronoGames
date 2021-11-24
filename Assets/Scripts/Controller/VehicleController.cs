@@ -23,7 +23,7 @@ public class VehicleController : MonoBehaviour
 
     private InputManager im;
     private Rigidbody rb;
-    private ParticleSystem[] particulesSmoke = Resources.FindObjectsOfTypeAll<ParticleSystem>();
+    private ParticleSystem[] particulesSmoke;
     public GameObject wheelMeshes, wheelColliders;
 
     private WheelCollider[] wheels = new WheelCollider[4];
@@ -75,9 +75,42 @@ public class VehicleController : MonoBehaviour
     {
         GetObjects();
         StartCoroutine(TimedLoop());
+        particulesSmoke = Resources.FindObjectsOfTypeAll<ParticleSystem>();
+        ActiveSmokeOnDrift();
     }
 
-    void FixedUpdate()
+    private void StopSmokeOnDrift()
+    {
+        foreach (ParticleSystem smoke in particulesSmoke)
+        {
+            smoke.Stop(true);
+        }
+    }
+    private void ActiveSmokeOnDrift()
+    {
+        foreach (ParticleSystem smoke in particulesSmoke)
+        {
+            smoke.gameObject.SetActive(true);
+        }
+    }
+    private void StartSmokeOnDrift()
+    {
+        if (kph >= 40)
+        {
+            foreach (ParticleSystem smoke in particulesSmoke)
+            {
+                smoke.Play(true);
+            }
+        } else
+        {
+            foreach (ParticleSystem smoke in particulesSmoke)
+            {
+                smoke.Stop(true);
+            }
+        }
+    }
+
+void FixedUpdate()
     {
         AnimateWheels();
         AddDownforce();
@@ -305,15 +338,8 @@ public class VehicleController : MonoBehaviour
 
         if (im.IsHandbrake || im.IsHandbrakeController)
         {
-            if(kph >= 40)
-            {
-                
-
-                foreach (ParticleSystem smoke in particulesSmoke)
-                {
-                    smoke.Play(true);
-                }
-            }
+           
+            StartSmokeOnDrift();
 
             sidewaysFriction = wheels[0].sidewaysFriction;
             forwardFriction = wheels[0].forwardFriction;
@@ -346,10 +372,7 @@ public class VehicleController : MonoBehaviour
         //executed when handbrake is being held
         else
         {
-            foreach(ParticleSystem smoke in particulesSmoke)
-            {
-                smoke.Stop(true);
-            }
+            StopSmokeOnDrift();
 
             forwardFriction = wheels[0].forwardFriction;
             sidewaysFriction = wheels[0].sidewaysFriction;
