@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class SelectionMenuManager : MonoBehaviour
 {
@@ -71,7 +72,7 @@ public class SelectionMenuManager : MonoBehaviour
 
     private void SpawnVehicle()
     {
-        int vehicleIndex = ddVehicles.value; 
+        int vehicleIndex = ddVehicles.value;
         gameManager.SelectedVehicleIndex = vehicleIndex;
 
         if (spawnedVehicle != null)
@@ -79,6 +80,7 @@ public class SelectionMenuManager : MonoBehaviour
             Destroy(spawnedVehicle);
         }
         spawnedVehicle = Instantiate(this.gameManager.SelectedVehiclePrefab, spawnVehicleTransform.position, spawnVehicleTransform.rotation);
+        spawnedVehicle.GetComponentInChildren<AudioListener>().enabled = false;
     }
 
     private void PBIsUpdated()

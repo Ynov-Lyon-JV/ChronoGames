@@ -474,7 +474,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5138268301536663097}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fd6ecc7ab3ceea14692d212536b61ada, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -841,7 +841,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8837888696717794776}
   serializedVersion: 2
-  m_Mass: 830
+  m_Mass: 850
   m_Drag: 0.05
   m_AngularDrag: 2
   m_UseGravity: 1
@@ -863,12 +863,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wheelMeshes: {fileID: 0}
   wheelColliders: {fileID: 0}
-  handBrakeFrictionMultiplier: 2
+  handBrakeFrictionMultiplier: 8
   isFrontDir: 1
   kph: 0
   smoothTime: 0.01
-  maxRPM: 5500
+  maxRPM: 5000
   minRPM: 3500
+  CoefRotationOverSpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.994873
+      inSlope: -0.5876884
+      outSlope: -0.5876884
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.40050185
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -1.4474173
+      outSlope: -1.4474173
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.125
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CoefRotation: 2
   wheelsRPM: 0
   engineRPM: 0
   isReverse: 0
@@ -876,64 +901,55 @@ MonoBehaviour:
   gearboxType: 0
   totalPower: 0
   gears:
-  - 2
-  - 1.7
-  - 1.3
+  - 50
+  - 40
+  - 30
   - 0.9
   - 0.4
   gearChangeSpeed:
-  - 20
   - 40
-  - 75
+  - 85
   - 100
+  - 125
   gearNum: 0
   enginePower:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 7.1261244
-      value: -0.0000067949295
-      inSlope: 0.061707713
-      outSlope: 0.061707713
+      time: 69.49905
+      value: 195.7175
+      inSlope: 0.4146465
+      outSlope: 0.4146465
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.2575297
+      outWeight: 0.24705355
     - serializedVersion: 3
-      time: 1548.1188
-      value: 77.80058
-      inSlope: 0.07305929
-      outSlope: 0.07305929
+      time: 147.76752
+      value: 453.6364
+      inSlope: 0.02489965
+      outSlope: 0.02489965
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.04756516
+      outWeight: 0.40368122
     - serializedVersion: 3
-      time: 4365.8794
-      value: 149.9561
-      inSlope: 0.053793617
-      outSlope: 0.053793617
+      time: 1269.6787
+      value: 480.68018
+      inSlope: 0.010413365
+      outSlope: 0.010413365
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.34450895
     - serializedVersion: 3
-      time: 5750
-      value: 230.31946
-      inSlope: -0.0046478743
-      outSlope: -0.0046478743
+      time: 4996.96
+      value: 493.95367
+      inSlope: 0.0012315077
+      outSlope: 0.0012315077
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.26827386
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 5809.6104
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
+      inWeight: 0.54591376
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
