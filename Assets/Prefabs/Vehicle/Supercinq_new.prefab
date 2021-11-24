@@ -542,7 +542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8583180670942769121
 Transform:
   m_ObjectHideFlags: 0
@@ -573,7 +573,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -1828,8 +1828,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 0.53333336}
-        key1: {r: 1, g: 1, b: 1, a: 0}
+        key0: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 0}
+        key1: {r: 1, g: 1, b: 1, a: 0.53333336}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1845,8 +1845,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 64764
-        atime2: 0
+        atime1: 3855
+        atime2: 64764
         atime3: 0
         atime4: 0
         atime5: 0
@@ -1854,7 +1854,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5713,7 +5713,7 @@ MonoBehaviour:
   wheelsRPM: 0
   engineRPM: 0
   isReverse: 0
-  driveType: 0
+  driveType: 2
   gearboxType: 0
   totalPower: 0
   gears:
@@ -5804,7 +5804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4703506705837767763
 Transform:
   m_ObjectHideFlags: 0
@@ -5835,7 +5835,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -7090,8 +7090,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 0.53333336}
-        key1: {r: 1, g: 1, b: 1, a: 0}
+        key0: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 0}
+        key1: {r: 1, g: 1, b: 1, a: 0.53333336}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -7107,8 +7107,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 64764
-        atime2: 0
+        atime1: 3855
+        atime2: 64764
         atime3: 0
         atime4: 0
         atime5: 0
@@ -7116,7 +7116,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
