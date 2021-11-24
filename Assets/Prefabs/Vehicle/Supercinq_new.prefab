@@ -506,7 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "FeuxArri\xE8re_mat": {fileID: 2100000, guid: 50c4ee02347095347b28fccb994c2511,
     type: 2}
-  "FeuxArri\xE8re_Index": 5
+  "FeuxArri\xE8re_Index": 4
 --- !u!1 &5663036166806076943
 GameObject:
   m_ObjectHideFlags: 0
