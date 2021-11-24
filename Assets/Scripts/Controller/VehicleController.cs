@@ -61,6 +61,9 @@ public class VehicleController : MonoBehaviour
     float DriftMultiplier = 0;
     #endregion
 
+    [Header("Effets")]
+    RearLights myRearLights;
+
     #region Coroutines
     private IEnumerator TimedLoop()
     {
@@ -73,6 +76,11 @@ public class VehicleController : MonoBehaviour
     #endregion
 
     #region Unity Methods
+    private void Awake()
+    {
+        myRearLights = transform.GetChild(0).GetComponent<RearLights>();
+    }
+
     void Start()
     {
         GetObjects();
@@ -115,13 +123,23 @@ public class VehicleController : MonoBehaviour
         }
     }
 
-void FixedUpdate()
+    void FixedUpdate()
     {
         AnimateWheels();
         AddDownforce();
         SteerVehicle();
         AdjustTraction();
         CalculateEnginePower();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+            myRearLights.ChangeLights(true);
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            myRearLights.ChangeLights(false);
+        }
     }
     #endregion
 

@@ -10176,6 +10176,7 @@ GameObject:
   - component: {fileID: 5131332418754980647}
   - component: {fileID: 8236607144407063945}
   - component: {fileID: 1346100653977910590}
+  - component: {fileID: 5181459204572591186}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -10264,6 +10265,21 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3635293980515091061, guid: cb6b07a1b3d42934bb1050a5fb56d2f0, type: 3}
+--- !u!114 &5181459204572591186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8442761105800621963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68424cf4e76186b4dad9c1c13268fd67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "FeuxArri\xE8re_mat": {fileID: 2100000, guid: 50c4ee02347095347b28fccb994c2511,
+    type: 2}
+  "FeuxArri\xE8re_Index": 2
 --- !u!1 &8670401662696803469
 GameObject:
   m_ObjectHideFlags: 0
