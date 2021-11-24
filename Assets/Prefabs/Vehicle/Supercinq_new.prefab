@@ -453,7 +453,7 @@ MeshRenderer:
   - {fileID: 6676317756383945732, guid: 4256b8bac9f72ec40ae8de22b0f37b5a, type: 3}
   - {fileID: 2100000, guid: 568b9e731c478284a8eb35f8ff5b0ff1, type: 2}
   - {fileID: 2100000, guid: fc40fca2cba2ee54994a2eb7f8396467, type: 2}
-  - {fileID: 2100000, guid: 5b55f404449b9f34da3bf9992bbfd92b, type: 2}
+  - {fileID: 2100000, guid: e40a3b2bbfd150d4ea21273e5fdf1e84, type: 2}
   - {fileID: 2100000, guid: f8af20fcd9f4e0148b62d6a4a1cff42c, type: 2}
   - {fileID: 2100000, guid: 2de58c88b58270748a180b6c5aa167aa, type: 2}
   - {fileID: 2100000, guid: 9948687cf3267f849af121cf3307831f, type: 2}
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "FeuxArri\xE8re_mat": {fileID: 2100000, guid: 50c4ee02347095347b28fccb994c2511,
     type: 2}
-  "FeuxArri\xE8re_Index": 4
+  "FeuxArri\xE8re_Index": 5
 --- !u!1 &5663036166806076943
 GameObject:
   m_ObjectHideFlags: 0
