@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CarController : MonoBehaviour
 {
     #region Fields
-    private bool isAccelerating = false;
+    [HideInInspector]public bool isAccelerating = false;
     private bool isBraking = false;
     private bool isBrakingLightOn = false;
     private bool isBackingUp = false;

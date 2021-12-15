@@ -6,7 +6,6 @@ public class CarCam : MonoBehaviour
     Transform carCam;
     Transform car;
     Rigidbody carPhysics;
-
     Animator cameraAnimator;
     Camera camera;
 
@@ -52,7 +51,10 @@ public class CarCam : MonoBehaviour
         rootNode.rotation = look;
 
         float Magnitude = carPhysics.velocity.magnitude;
-        cameraAnimator.SetFloat("ConstantShake", Magnitude / 120);
+        if(Input.GetKey(KeyCode.Z))
+            cameraAnimator.SetFloat("ConstantShake", Magnitude / 120);
+        else
+            cameraAnimator.SetFloat("ConstantShake", 0 / 120);
 
         if (Magnitude - previousMagnitude < -5)
             cameraAnimator.SetTrigger("Hit");

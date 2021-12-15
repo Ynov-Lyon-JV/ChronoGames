@@ -25,6 +25,7 @@ public class VehicleController : MonoBehaviour
     private InputManager im;
     private Rigidbody rb;
     private ParticleSystem[] particulesSmoke;
+    private ExplodingRear[] myExplodingRears;
     public GameObject wheelMeshes, wheelColliders;
 
     private WheelCollider[] wheels = new WheelCollider[4];
@@ -79,13 +80,18 @@ public class VehicleController : MonoBehaviour
     private void Awake()
     {
         myRearLights = transform.GetChild(0).GetComponent<RearLights>();
+
+        particulesSmoke = new ParticleSystem[2];
+        particulesSmoke[0] = transform.GetChild(1).GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
+        particulesSmoke[1] = transform.GetChild(1).GetChild(3).GetChild(0).GetComponent<ParticleSystem>();
+
+        myExplodingRears = GetComponentsInChildren<ExplodingRear>();
     }
 
     void Start()
     {
         GetObjects();
         StartCoroutine(TimedLoop());
-        particulesSmoke = Resources.FindObjectsOfTypeAll<ParticleSystem>();
         ActiveSmokeOnDrift();
 
         // Unlock Vehicule to drive :
@@ -121,6 +127,12 @@ public class VehicleController : MonoBehaviour
                 smoke.Stop(true);
             }
         }
+    }
+
+    private void ExplodeRears()
+    {
+        foreach (ExplodingRear element in myExplodingRears)
+            element.Explode();
     }
 
     void FixedUpdate()
@@ -313,12 +325,26 @@ public class VehicleController : MonoBehaviour
         else return false;
     }
 
+    int index_kph = 0;
+
     private void ShifterPro()
     {
         if (!IsGrounded())
         {
             return;
         }
+
+        if(index_kph < gearChangeSpeed.Length && kph > gearChangeSpeed[index_kph])
+        {
+            ExplodeRears();
+            index_kph++;
+        }
+        else if (index_kph > 0 && kph < gearChangeSpeed[index_kph - 1])
+        {
+            index_kph--;
+        }
+
+
         switch (gearboxType)
         {
             //Automatic
