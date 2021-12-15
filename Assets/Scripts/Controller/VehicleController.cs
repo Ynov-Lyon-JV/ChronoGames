@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class VehicleController : MonoBehaviour
@@ -22,6 +24,7 @@ public class VehicleController : MonoBehaviour
 
     private InputManager im;
     private Rigidbody rb;
+    private ParticleSystem[] particulesSmoke;
     public GameObject wheelMeshes, wheelColliders;
 
     private WheelCollider[] wheels = new WheelCollider[4];
@@ -32,7 +35,7 @@ public class VehicleController : MonoBehaviour
     [Header("Variables")]
     public float handBrakeFrictionMultiplier = 2f;
     public bool isFrontDir = true;
-    public float kph;
+    public int kph;
     public float smoothTime;
     public float maxRPM, minRPM;
     public AnimationCurve CoefRotationOverSpeed;
@@ -55,6 +58,7 @@ public class VehicleController : MonoBehaviour
 
     [Header("DEBUG")]
     public float[] slip = new float[4];
+    float DriftMultiplier = 0;
     #endregion
 
     #region Coroutines
@@ -73,9 +77,42 @@ public class VehicleController : MonoBehaviour
     {
         GetObjects();
         StartCoroutine(TimedLoop());
+        particulesSmoke = Resources.FindObjectsOfTypeAll<ParticleSystem>();
+        ActiveSmokeOnDrift();
     }
 
-    void FixedUpdate()
+    private void StopSmokeOnDrift()
+    {
+        foreach (ParticleSystem smoke in particulesSmoke)
+        {
+            smoke.Stop(true);
+        }
+    }
+    private void ActiveSmokeOnDrift()
+    {
+        foreach (ParticleSystem smoke in particulesSmoke)
+        {
+            smoke.gameObject.SetActive(true);
+        }
+    }
+    private void StartSmokeOnDrift()
+    {
+        if (kph >= 40)
+        {
+            foreach (ParticleSystem smoke in particulesSmoke)
+            {
+                smoke.Play(true);
+            }
+        } else
+        {
+            foreach (ParticleSystem smoke in particulesSmoke)
+            {
+                smoke.Stop(true);
+            }
+        }
+    }
+
+void FixedUpdate()
     {
         AnimateWheels();
         AddDownforce();
@@ -115,8 +152,8 @@ public class VehicleController : MonoBehaviour
                 }
                 break;
         }
-
-        kph = rb.velocity.magnitude * 3.6f;
+       
+        kph = (int) Math.Round(rb.velocity.magnitude * 3.6f, MidpointRounding.AwayFromZero);
     }
 
     private void BrakeVehicle()
@@ -237,7 +274,7 @@ public class VehicleController : MonoBehaviour
             r++;
         }
 
-        wheelsRPM = (r != 0) ? sum / r : 0;
+        wheelsRPM = (r != 0) ? (int) sum / r : 0;
 
         if (wheelsRPM < 0 && !isReverse)
         {
@@ -303,11 +340,19 @@ public class VehicleController : MonoBehaviour
 
         if (im.IsHandbrake || im.IsHandbrakeController)
         {
+            DriftMultiplier += Time.deltaTime /10;
+
+           
+            StartSmokeOnDrift();
+
             sidewaysFriction = wheels[0].sidewaysFriction;
             forwardFriction = wheels[0].forwardFriction;
 
             float velocity = 0;
             sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = forwardFriction.extremumValue = forwardFriction.asymptoteValue = Mathf.SmoothDamp(forwardFriction.asymptoteValue, driftFactor * handBrakeFrictionMultiplier, ref velocity, driftSmothFactor);
+
+            sidewaysFriction.stiffness -= 0.01f;
+            sidewaysFriction.stiffness = Mathf.Clamp(sidewaysFriction.stiffness, 0.2f, 1f);
 
             for (int i = 0; i < 4; i++)
             {
@@ -329,13 +374,18 @@ public class VehicleController : MonoBehaviour
             else
                 multiplier = 0;
 
-            GetComponent<Rigidbody>().AddForce(transform.forward * (kph / 400) * 12000 * multiplier);
+            //GetComponent<Rigidbody>().AddForce(transform.forward * (kph / 400) * 12000 * multiplier * DriftMultiplier);
         }
         //executed when handbrake is being held
         else
         {
+            StopSmokeOnDrift();
+
             forwardFriction = wheels[0].forwardFriction;
             sidewaysFriction = wheels[0].sidewaysFriction;
+
+            sidewaysFriction.stiffness += 0.01f;
+            sidewaysFriction.stiffness = Mathf.Clamp(sidewaysFriction.stiffness, 0.2f, 1f);
 
             forwardFriction.extremumValue = forwardFriction.asymptoteValue = sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue =
                 ((kph * handBrakeFrictionMultiplier) / 300) + 1;
@@ -346,6 +396,9 @@ public class VehicleController : MonoBehaviour
                 wheels[i].sidewaysFriction = sidewaysFriction;
 
             }
+
+            if (DriftMultiplier != 0)
+                DriftMultiplier = 0;
         }
 
         //checks the amount of slip to control the drift
