@@ -79,6 +79,9 @@ public class VehicleController : MonoBehaviour
         StartCoroutine(TimedLoop());
         particulesSmoke = Resources.FindObjectsOfTypeAll<ParticleSystem>();
         ActiveSmokeOnDrift();
+
+        // Unlock Vehicule to drive :
+        rb.isKinematic = false;
     }
 
     private void StopSmokeOnDrift()
