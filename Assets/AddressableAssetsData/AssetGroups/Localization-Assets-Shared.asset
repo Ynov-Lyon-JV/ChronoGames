@@ -25,6 +25,10 @@ MonoBehaviour:
     m_Address: Assets/Localisation/Tables/SelectionScene Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: f78b921f0ebeacb4da95923f31919886
+    m_Address: Assets/Localisation/Tables/GameScene Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: ac9a8ad1ac1d8834c9385e0d361d91f6, type: 2}
   m_SchemaSet:
