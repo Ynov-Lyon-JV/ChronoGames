@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4723627281812829781}
   - component: {fileID: 8512483245454211568}
   - component: {fileID: 5892569926645042490}
+  - component: {fileID: 7124129015110580980}
   m_Layer: 0
   m_Name: road_line_trck 2
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7124129015110580980
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5388101004673445103}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7879458951061943370, guid: 4a32e1b4da6f81d42884176b08a14e44, type: 3}
