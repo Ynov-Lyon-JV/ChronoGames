@@ -42,5 +42,9 @@ MonoBehaviour:
     m_Localized: Chiudere
     m_Metadata:
       m_Items: []
+  - m_Id: 22123837070893056
+    m_Localized: Editore
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

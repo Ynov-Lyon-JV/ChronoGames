@@ -36,6 +36,10 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("SelectionScene");
     }
 
+    public void Edit()
+    {
+        SceneManager.LoadScene("MapEditorScene");
+    }
 
     public void OpenCloseOptionPanel()
     {

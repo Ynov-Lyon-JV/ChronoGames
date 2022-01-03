@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: CloseButton
     m_Metadata:
       m_Items: []
+  - m_Id: 22123837070893056
+    m_Key: EditorButton
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

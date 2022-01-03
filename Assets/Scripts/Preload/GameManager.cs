@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     //Selection
     [SerializeField] private List<GameObject> vehicles;
     [SerializeField] private List<GameObject> maps;
+    [SerializeField] private List<GameObject> modules;
 
     private int selectedVehicleIndex;
     private GameObject selectedVehiclePrefab;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     //Selection
     public List<GameObject> Vehicles { get => vehicles; }
     public List<GameObject> Maps { get => maps; }
+    public List<GameObject> Modules { get => modules; }
     public GameObject SelectedVehiclePrefab { get => selectedVehiclePrefab; }
     public GameObject SelectedMapPrefab { get => selectedMapPrefab; }
     public int SelectedVehicleIndex { get => selectedVehicleIndex; set => SetVehicleIndexAndPrefab(value); }
