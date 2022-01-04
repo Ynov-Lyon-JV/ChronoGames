@@ -50,4 +50,9 @@ public class UIMapEditor : MonoBehaviour
         }
         moduleManager.IsDeleteMode = !moduleManager.IsDeleteMode;
     }
+
+    public void ValidateMap()
+    {
+        Debug.Log("Started map validation");
+    }
 }
