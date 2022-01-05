@@ -18,12 +18,40 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 12170682368
-    m_Localized: Open
+  - m_Id: 7213799265132544
+    m_Localized: Main menu
     m_Metadata:
       m_Items: []
-  - m_Id: 86602801152
-    m_Localized: Close
+  - m_Id: 7215465070714880
+    m_Localized: Save map
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7215821666246656
+    m_Localized: Load map
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218008215642112
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218117460484096
+    m_Localized: Finish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218161752334336
+    m_Localized: Road
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218275598327808
+    m_Localized: Turn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218331151884288
+    m_Localized: Bump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7537777871544320
+    m_Localized: Reset map
     m_Metadata:
       m_Items: []
   references:

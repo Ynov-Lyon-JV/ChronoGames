@@ -18,12 +18,40 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 12170682368
-    m_Localized: Ouvrir
+  - m_Id: 7213799265132544
+    m_Localized: Menu principal
     m_Metadata:
       m_Items: []
-  - m_Id: 86602801152
-    m_Localized: Fermer
+  - m_Id: 7215465070714880
+    m_Localized: Sauvegarder carte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7215821666246656
+    m_Localized: Charger carte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218008215642112
+    m_Localized: "D\xE9part"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218117460484096
+    m_Localized: "Arriv\xE9e"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218161752334336
+    m_Localized: Route
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218275598327808
+    m_Localized: Virage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218331151884288
+    m_Localized: Bosse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7537777871544320
+    m_Localized: "Remise \xE0 z\xE9ro"
     m_Metadata:
       m_Items: []
   references:

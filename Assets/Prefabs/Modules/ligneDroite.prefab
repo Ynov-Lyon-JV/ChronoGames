@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5639733355659923577}
   - component: {fileID: 5639733355659923462}
   - component: {fileID: 5639733355659923463}
-  - component: {fileID: 5639733355659923576}
   - component: {fileID: 919132147834807406}
   m_Layer: 0
   m_Name: ligneDroite
@@ -131,19 +130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectId: 2
---- !u!135 &5639733355659923576
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4793292675438947668}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 100
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!64 &919132147834807406
 MeshCollider:
   m_ObjectHideFlags: 0

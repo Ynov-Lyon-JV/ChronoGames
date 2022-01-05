@@ -15,12 +15,40 @@ MonoBehaviour:
   m_TableCollectionName: EditorMenu
   m_TableCollectionNameGuidString: 8fcb62266d75e2340aa69b3ae44ce220
   m_Entries:
-  - m_Id: 12170682368
-    m_Key: BtnOpenPanel
+  - m_Id: 7213799265132544
+    m_Key: BtnMainMenu
     m_Metadata:
       m_Items: []
-  - m_Id: 86602801152
-    m_Key: BtnClosePanel
+  - m_Id: 7215465070714880
+    m_Key: BtnSaveMap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7215821666246656
+    m_Key: BtnLoadMap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218008215642112
+    m_Key: LabelStart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218117460484096
+    m_Key: LabelFinish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218161752334336
+    m_Key: LabelRoad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218275598327808
+    m_Key: LabelTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218331151884288
+    m_Key: LabelBump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7537777871544320
+    m_Key: BtnResetMap
     m_Metadata:
       m_Items: []
   m_Metadata:

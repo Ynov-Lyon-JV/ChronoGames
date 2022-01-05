@@ -8,12 +8,12 @@ public class UIMapEditor : MonoBehaviour
     public Button validateButton;
     public ModuleManager moduleManager;
     private GameManager _gameManager;
-
-
+    private MapValidator _mapValidator;
 
     // Start is called before the first frame update
     void Start()
     {
+        _mapValidator = FindObjectOfType<MapValidator>();
         _gameManager = FindObjectOfType<GameManager>();
     }
 
@@ -53,6 +53,10 @@ public class UIMapEditor : MonoBehaviour
 
     public void ValidateMap()
     {
-        Debug.Log("Started map validation");
+        _mapValidator.MapStateValue = MapValidator.MapState.Validated;
+        if (moduleManager.IsDeleteMode)
+        {
+            moduleManager.IsDeleteMode = false;
+        }
     }
 }

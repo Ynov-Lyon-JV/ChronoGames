@@ -15,10 +15,10 @@ public class Module : MonoBehaviour
 
     private bool _isPlaceable = true;
 
-    public bool IsPlaceable { get => _isPlaceable; set => _isPlaceable = value; }
+    public bool IsPlaceable { get => _isPlaceable; set => SetIsPlaceable(value); }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _children = this.GetComponentsInChildren<Renderer>();
         _materials = new List<Material[]>();
@@ -34,7 +34,7 @@ public class Module : MonoBehaviour
         }
     }
 
-    private void RestoreMaterial()
+    public void RestoreMaterial()
     {
         for (int i = 0; i < _children.Length; i++)
         {
@@ -57,24 +57,14 @@ public class Module : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void SetIsPlaceable(bool isPlaceable)
     {
-        if (collision.gameObject.CompareTag("Module"))
-        {
-            _isPlaceable = false;
-            ChangeMaterial(_isPlaceable);
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        _isPlaceable = true;
+        _isPlaceable = isPlaceable;
         ChangeMaterial(_isPlaceable);
     }
-
+   
     private void OnDisable()
     {
-        this.gameObject.GetComponentInChildren<SphereCollider>().enabled = false;
         RestoreMaterial();
     }
 }

@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4212709010677617530}
   - component: {fileID: 4212709010677617529}
   - component: {fileID: 4212709010677617524}
-  - component: {fileID: 4212709010677617525}
   m_Layer: 0
   m_Name: virage
   m_TagString: Module
@@ -145,16 +144,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _matPlaceable: {fileID: 2100000, guid: 5fbbbb5f436f3204e862ffd732d118e4, type: 2}
   _matUnplaceable: {fileID: 2100000, guid: 68548131d82c55f418b76e23f88d9d7a, type: 2}
---- !u!135 &4212709010677617525
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3942872163287821870}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 100
-  m_Center: {x: 0, y: 0, z: 0}
