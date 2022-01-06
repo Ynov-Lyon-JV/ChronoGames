@@ -24,6 +24,8 @@ public class RaceManager : MonoBehaviour
     private GhostManager ghostManager;
     private GameObject currGhost;
 
+    public bool StartRunning { get; private set; }
+
     #endregion
 
     #region Properties
@@ -63,6 +65,8 @@ public class RaceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        StartRunning = displayScript.IsRunning;
+
         if (currVehicle != null)
         {
             if (Input.GetKeyDown(KeyCode.Backspace))
@@ -85,6 +89,7 @@ public class RaceManager : MonoBehaviour
         try
         {
             this.currVehicle = Instantiate(this.gameManager.SelectedVehiclePrefab, currMapScript.StartBlock.transform.position, currMapScript.StartBlock.transform.rotation);
+            this.currVehicle.GetComponent<Rigidbody>().isKinematic = true;
             GameObject.Find("Main Camera").GetComponent<Camera>().enabled = true;
             GameObject.Find("CamParent").GetComponent<CarCam>().enabled = true;
         }
