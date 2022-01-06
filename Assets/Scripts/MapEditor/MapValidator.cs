@@ -5,7 +5,8 @@ public class MapValidator : MonoBehaviour
     public enum MapState
     {
         Validated,
-        Edited
+        Edited,
+        Empty
     }
 
     private MapState _mapState;
@@ -14,6 +15,6 @@ public class MapValidator : MonoBehaviour
 
     private void Start()
     {
-        _mapState = MapState.Edited;
+        _mapState = MapState.Empty;
     }
 }

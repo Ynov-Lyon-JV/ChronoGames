@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class ModuleManager : MonoBehaviour
 {
+    private GameManager _gameManager;
+
     private GameObject _selectedPrefab;
 
-    private Quaternion _rotation;
+    private Quaternion _moduleRot;
+    private float _rotation = 0.0f;
 
     private int _moduleSize = 50;
     private int _gridSize = 10;
@@ -33,8 +36,9 @@ public class ModuleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _gameManager = FindObjectOfType<GameManager>();
         _validator = FindObjectOfType<MapValidator>();
-        _rotation = Quaternion.identity;
+        _moduleRot = Quaternion.identity;
 
         _isPosTaken = new Module[_gridSize, _gridSize];
     }
@@ -66,11 +70,11 @@ public class ModuleManager : MonoBehaviour
 
                     if (_module == null)
                     {
-                        _module = Instantiate(_selectedPrefab, position, _rotation).GetComponent<Module>();
+                        _module = Instantiate(_selectedPrefab, position, _moduleRot).GetComponent<Module>();
                     }
 
                     _module.transform.position = new Vector3(position.x, 0, position.z);
-                    _module.transform.rotation = _rotation;
+                    _module.transform.rotation = _moduleRot;
 
                     bool isPlaceable = _isPosTaken[rankX, rankZ] == null;
 
@@ -82,6 +86,10 @@ public class ModuleManager : MonoBehaviour
                         if (Input.GetKeyDown(KeyCode.Mouse0))
                         {
                             _isPosTaken[rankX, rankZ] = _module;
+
+                            _module.GetComponent<ObjectData>().RankX = rankX;
+                            _module.GetComponent<ObjectData>().RankZ = rankZ;
+                            _module.GetComponent<ObjectData>().Rotation = _rotation;
 
                             _module.enabled = false;
                             _module = null;
@@ -167,7 +175,8 @@ public class ModuleManager : MonoBehaviour
 
     private void RotateModule()
     {
-        _rotation *= Quaternion.Euler(0, 90, 0);
+        _rotation = (_rotation + 90) % 360;
+        _moduleRot *= Quaternion.Euler(0, 90, 0);
     }
 
     public void ResetPrefab()
@@ -200,7 +209,28 @@ public class ModuleManager : MonoBehaviour
 
         _nbFinishModule = 0;
         _nbStartModule = 0;
+    }
 
-        _validator.MapStateValue = MapValidator.MapState.Edited;
+    public void InstantiateMap(List<ObjectInfo> infos)
+    {
+        ResetMap();
+        foreach (ObjectInfo i in infos)
+        {
+            Vector3 pos = new Vector3(i.RankX * _moduleSize + _moduleSize / 2, 0.0f, i.RankZ * _moduleSize + _moduleSize / 2);
+
+            Module module = Instantiate(_gameManager.Modules[i.Id], pos, Quaternion.identity).GetComponent<Module>();
+            module.transform.rotation *= Quaternion.Euler(0, i.Rotation, 0);
+
+            _isPosTaken[i.RankX, i.RankZ] = module;
+
+            module.GetComponent<ObjectData>().RankX = i.RankX;
+            module.GetComponent<ObjectData>().RankZ = i.RankZ;
+            module.GetComponent<ObjectData>().Rotation = i.Rotation;
+        }
+    }
+
+    private void OnDisable()
+    {
+        ResetPrefab();
     }
 }

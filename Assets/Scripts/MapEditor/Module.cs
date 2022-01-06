@@ -23,7 +23,7 @@ public class Module : MonoBehaviour
         _children = this.GetComponentsInChildren<Renderer>();
         _materials = new List<Material[]>();
         SaveMaterials();
-        ChangeMaterial(_isPlaceable);
+        //ChangeMaterial(_isPlaceable);
     }
 
     private void SaveMaterials()

@@ -1,40 +1,34 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class UIMenu : MonoBehaviour
 {
-    public Button btnSaveMap;
-
-    private MapValidator _validator;
-    private MapValidator.MapState _mapState;
+    private SaveLoadManager _slmanager;
+    private ModuleManager _moduleManager;
 
     private void Start()
     {
-        _validator = FindObjectOfType<MapValidator>();
-    }
-
-    void Update()
-    {
-        //Check if map is validated
-        _mapState = _validator.MapStateValue;
-        btnSaveMap.interactable = _mapState == MapValidator.MapState.Validated;
+        _slmanager = FindObjectOfType<SaveLoadManager>();
+        _moduleManager = GetComponent<ModuleManager>();
     }
 
     public void BackToMainMenu()
     {
+        //If map is edited prompt to save the map
         SceneManager.LoadScene("MainMenuScene");
     }
 
     public void SaveMap()
     {
-        //Save current modules infos in JSON file
-        Debug.Log("Map saved");
+        //Initiate function in save/load script
+        _moduleManager.ResetPrefab();
+        _slmanager.SaveMap();
     }
 
     public void LoadMap()
     {
         //Discard current modules and load new ones based on the selected file
-        Debug.Log("Map loaded");
+        //_moduleManager.ResetPrefab();
+        _slmanager.LoadMap();
     }
 }
