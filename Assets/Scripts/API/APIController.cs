@@ -7,7 +7,7 @@ using System;
 
 public class APIController : MonoBehaviour
 {
-    private const string _URL_TIMES_API = "https://chronogame.ydayslyon.fr/times/";
+    private const string _URL_TIMES_API = "https://chronogame.ydayslyon.fr/api/times/";
 
     #region Fields
 
