@@ -21,12 +21,15 @@ public class VehicleController : MonoBehaviour
 
     #region Fields
 
-
+    [Header("Managers references")]
     private InputManager im;
+    [Space]
+
+    [Header("Components and child components")]
     private Rigidbody rb;
     private ParticleSystem[] particulesSmoke;
     private ExplodingRear[] myExplodingRears;
-    public GameObject wheelMeshes, wheelColliders;
+    [HideInInspector] public GameObject wheelMeshes, wheelColliders;
 
     private WheelCollider[] wheels = new WheelCollider[4];
     private GameObject[] wheelsMesh = new GameObject[4];
@@ -35,21 +38,21 @@ public class VehicleController : MonoBehaviour
 
     [Header("Variables")]
     public float handBrakeFrictionMultiplier = 2f;
-    public bool isFrontDir = true;
-    public int kph;
+    [HideInInspector] public bool isFrontDir = true;
+    [HideInInspector] public int kph;
     public float smoothTime;
     public float maxRPM, minRPM;
     public AnimationCurve CoefRotationOverSpeed;
     public float CoefRotation;
-    public float wheelsRPM;
-    public float engineRPM;
+    [HideInInspector] public float wheelsRPM;
+    [HideInInspector] public float engineRPM;
     public bool isReverse = false;
     [SerializeField] private DriveType driveType;
     [SerializeField] private GearboxType gearboxType;
-    public float totalPower;
+    [HideInInspector] public float totalPower;
     public float[] gears;
     public float[] gearChangeSpeed;
-    public int gearNum;
+    [HideInInspector] public int gearNum;
     public AnimationCurve enginePower;
 
     private WheelFrictionCurve forwardFriction, sidewaysFriction;
@@ -57,8 +60,15 @@ public class VehicleController : MonoBehaviour
     //Hardcoded values
     private float radius = 6, brakePower, downforceValue = 10f, driftFactor;
 
+    [Space]
+    [Header("Custom gravity")]
+    private float airTime;
+    [Tooltip("The multiplier applied to the gravity. If the car is on the ground, the gravity modifier will be at time = 0")]
+    public AnimationCurve myGravityOverAirtime;
+    [Space]
+
     [Header("DEBUG")]
-    public float[] slip = new float[4];
+    [HideInInspector] public float[] slip = new float[4];
     float DriftMultiplier = 0;
     #endregion
 
@@ -138,7 +148,7 @@ public class VehicleController : MonoBehaviour
     void FixedUpdate()
     {
         AnimateWheels();
-        AddDownforce();
+        SimulateGravity();
         SteerVehicle();
         AdjustTraction();
         CalculateEnginePower();
@@ -250,9 +260,14 @@ public class VehicleController : MonoBehaviour
         }
     }
 
-    private void AddDownforce()
+    private void SimulateGravity()
     {
-        rb.AddForce(-transform.up * downforceValue * rb.velocity.magnitude);
+        bool isGrounded = IsGrounded();
+        if (isGrounded && airTime != 0)
+            airTime = 0;
+        else if(!isGrounded)
+            airTime += Time.fixedDeltaTime;
+        rb.AddForce(-Vector3.up * downforceValue * 1000 * myGravityOverAirtime.Evaluate((airTime)));
     }
 
     private void AnimateWheels()
@@ -374,7 +389,7 @@ public class VehicleController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        if (wheels[0].isGrounded && wheels[1].isGrounded && wheels[2].isGrounded && wheels[3].isGrounded)
+        if (wheels[0].isGrounded || wheels[1].isGrounded || wheels[2].isGrounded || wheels[3].isGrounded)
             return true;
         else
             return false;
