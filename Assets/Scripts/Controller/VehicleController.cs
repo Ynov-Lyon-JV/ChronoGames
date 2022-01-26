@@ -114,7 +114,7 @@ public class VehicleController : MonoBehaviour
     }
     private void StartSmokeOnDrift()
     {
-        if (kph >= 40)
+        if (kph >= 40 && IsGrounded())
         {
             foreach (ParticleSystem smoke in particulesSmoke)
             {
