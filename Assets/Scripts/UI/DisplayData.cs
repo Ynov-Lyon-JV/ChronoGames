@@ -40,6 +40,7 @@ public class DisplayData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        IsCountdown = false;
         countdownText.text = maxCountdown.ToString();
         currCountdown = maxCountdown;
     }
