@@ -43,6 +43,26 @@ MonoBehaviour:
     m_Key: EditorButton
     m_Metadata:
       m_Items: []
+  - m_Id: 30424762093002752
+    m_Key: NewLoadText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30425813160419328
+    m_Key: LoadText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30425860497334272
+    m_Key: NewText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30433631372435456
+    m_Key: CancelText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30466493509394432
+    m_Key: SelectText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
