@@ -80,7 +80,6 @@ public class SelectionMenuManager : MonoBehaviour
             Destroy(spawnedVehicle);
         }
         spawnedVehicle = Instantiate(this.gameManager.SelectedVehiclePrefab, spawnVehicleTransform.position, spawnVehicleTransform.rotation);
-        spawnedVehicle.GetComponentInChildren<AudioListener>().enabled = false;
     }
 
     private void PBIsUpdated()
