@@ -103,7 +103,6 @@ public class VehicleController : MonoBehaviour
     {
         GetObjects();
         StartCoroutine(TimedLoop());
-        particulesSmoke = Resources.FindObjectsOfTypeAll<ParticleSystem>();
         raceManager = GameObject.Find("RaceManager").GetComponent<RaceManager>();
         ActiveSmokeOnDrift();
 
