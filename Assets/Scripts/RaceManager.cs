@@ -239,7 +239,8 @@ public class RaceManager : MonoBehaviour
     private void EndRaceWorkflow()
     {
         displayScript.IsRunning = false;
-        currVehicle.GetComponent<VehicleController>().enabled = false;
+        //currVehicle.GetComponent<VehicleController>().enabled = false;
+        currVehicle.GetComponent<VehicleController>().DisableInputs();
         endRaceManager.SetLastTime();
         endPanelPanelOpener.OpenClosePanel();
         byte[] file = ghostManager.SaveToByteArray();
