@@ -7,7 +7,7 @@ public class Map : MonoBehaviour
     #region Fields
     [SerializeField] private BlockStart start;
     [SerializeField] private BlockFinish finish;
-    [SerializeField] private List<BlockCP> cpList;
+    private GameObject[] cpList;
     [SerializeField] private bool isMultilap = false;
     [SerializeField] private int totLap;
     private BlockCP lastCP;
@@ -17,7 +17,6 @@ public class Map : MonoBehaviour
     #region Properties
     public BlockStart StartBlock { get => start; }
     public BlockFinish Finish { get => finish; }
-    public List<BlockCP> CpList { get => cpList; }
     public BlockCP LastCP { get => lastCP; }
     public int TotLap { get => totLap; }
     public int CurrentLap { get => currentLap; }
@@ -32,11 +31,18 @@ public class Map : MonoBehaviour
     #region Unity Methods
     void Awake()
     {
-        finish.FinishLinePassed += () => FinishLineWorkflow();
-        foreach (BlockCP cp in cpList)
+        cpList = GameObject.FindGameObjectsWithTag("Checkpoint");
+     /* if(lastCP != null)
         {
-            cp.IsLastCP += () => SetLastCP(cp);
+            lastCP.LinePassed += () => FinishLineWorkflow();
+        }*/
+
+        foreach (GameObject cp in cpList)
+        {
+            BlockCP blockCp = (BlockCP) cp.GetComponent<BlockCP>();
+            blockCp.IsLastCP += () => CheckEndRace(blockCp);
         }
+        
         if (!isMultilap)
             totLap = 1;
         else
@@ -55,16 +61,16 @@ public class Map : MonoBehaviour
     {
         if (CheckCPs())
         {
-            if (currentLap == totLap)
-            {
+           // if (currentLap == totLap)
+          //  {
                 EndRace();
-            }
+           /* }
             else
             {
                 currentLap++;
                 ResetCheckpoints();
                 EndLap();
-            }
+            }*/
         }
     }
 
@@ -72,9 +78,10 @@ public class Map : MonoBehaviour
     /// Function called when the player gets accros a checkpoint
     /// </summary>
     /// <param name="_cp">The checkpoint passed</param>
-    private void SetLastCP(BlockCP _cp)
+    private void CheckEndRace(BlockCP _cp)
     {
         lastCP = _cp;
+        FinishLineWorkflow();
     }
 
     /// <summary>
@@ -83,9 +90,11 @@ public class Map : MonoBehaviour
     /// <returns></returns>
     private bool CheckCPs()
     {
-        foreach (BlockCP cp in cpList)
+        foreach (GameObject cp in cpList)
         {
-            if (cp.IsPassed == false)
+            BlockCP blockCp = (BlockCP)cp.GetComponent<BlockCP>();
+             
+            if (blockCp.IsPassed == false)
             {
                 return false;
             }
@@ -98,9 +107,10 @@ public class Map : MonoBehaviour
     /// </summary>
     private void ResetCheckpoints()
     {
-        for (int i = 0; i < cpList.Count; i++)
+        for (int i = 0; i < cpList.Length; i++)
         {
-            cpList[i].IsPassed = false;
+            BlockCP blockCp = (BlockCP)cpList[i].GetComponent<BlockCP>();
+            blockCp.IsPassed = false;
         }
     }
 
