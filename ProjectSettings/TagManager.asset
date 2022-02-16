@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Entry
   - Module
+  - CameraSpawn
   layers:
   - Default
   - TransparentFX

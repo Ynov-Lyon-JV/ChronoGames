@@ -25,6 +25,17 @@ public class RaceManager : MonoBehaviour
     private GameObject currGhost;
 
     public bool StartRunning { get; private set; }
+    private float _speed { get; set; }
+    private bool _isCameraRotating { get; set; }
+    private GameObject? _camParent;
+    private Vector3 _positionCameraBase;
+    private Camera _startingCamera;
+    private GameObject? _startingCamParent;
+    private GameObject? _startPanel;
+    private GameObject[] _listCameraSpawn;
+    private int _indexListCameraSpawn;
+    private float _timerCameraSpawn;
+    private GameObject _gameHUD;
 
     #endregion
 
@@ -38,8 +49,23 @@ public class RaceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _timerCameraSpawn = 0;
+        _indexListCameraSpawn = 0;
+        _speed = -10;
         endPanelPanelOpener = GameObject.Find("EndPanel").GetComponent<PanelOpener>();
         endRaceManager = GameObject.Find("EndManager").GetComponent<EndRaceManager>();
+        _startPanel = GameObject.Find("StartPanel");
+        _gameHUD = GameObject.Find("GameHUD");
+
+        if(_gameHUD != null)
+        {
+            _gameHUD.SetActive(false);
+        }
+
+        if (_startPanel != null)
+        {
+            _startPanel.SetActive(true);
+        }
 
         ghostManager = FindObjectOfType<GhostManager>();
 
@@ -47,6 +73,9 @@ public class RaceManager : MonoBehaviour
 
         this.currMap = Instantiate(gameManager.SelectedMapPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
         currMapScript = currMap.GetComponent<Map>();
+
+        // Get all camera's spawn for starting animation 
+        _listCameraSpawn = GameObject.FindGameObjectsWithTag("CameraSpawn");
 
         apiController = FindObjectOfType<APIController>();
         apiController.PBUpdated += () => UpdatePB();
@@ -69,6 +98,8 @@ public class RaceManager : MonoBehaviour
 
         if (currVehicle != null)
         {
+            AnimationCameraBeforeStart();
+
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
                 RespawnToLastCP();
@@ -76,11 +107,71 @@ public class RaceManager : MonoBehaviour
             displayScript.UpdateSpeed(currVehicle.GetComponent<VehicleController>().kph);
             displayScript.UpdateGear(currVehicle.GetComponent<VehicleController>().isReverse, currVehicle.GetComponent<VehicleController>().gearNum);
             displayScript.UpdateRPM(currVehicle.GetComponent<VehicleController>().engineRPM);
+
+            if (_startingCamParent != null && _isCameraRotating)
+            {
+                SpawnCamera();
+            }
         }
     }
     #endregion
 
+    public void StartRace()
+    {
+        displayScript.IsCountdown = true;
+
+        _startPanel.SetActive(false);
+        _startingCamera.enabled = false;
+
+        _camParent.GetComponent<CarCam>().enabled = true;
+
+        if (_gameHUD != null)
+        {
+            _gameHUD.SetActive(true);
+        }
+        //_camParent.SetActive(true);
+    }
+
+
     #region Private Methods
+    /// <summary>
+    /// Rotate vehicule's camera around to create an animation before starting the race
+    /// </summary>
+    private void AnimationCameraBeforeStart()
+    {
+        if(_startingCamParent != null && _isCameraRotating)
+        {
+            _startingCamParent.transform.Rotate(0, _speed * Time.deltaTime, 0);
+        } 
+        else if(_startingCamParent != null && _isCameraRotating == false)
+        {
+            _startingCamParent.transform.position = _positionCameraBase;
+        }
+    }
+
+    private void SpawnCamera()
+    {
+        _timerCameraSpawn += Time.deltaTime;
+
+        if(_timerCameraSpawn >= 5.0f)
+        {
+            GetNextCameraSpawn();
+            _startingCamParent.transform.position = _listCameraSpawn[_indexListCameraSpawn].transform.position;
+            _timerCameraSpawn = 0;
+        } 
+    }
+
+    private void GetNextCameraSpawn()
+    {
+        if(_indexListCameraSpawn == _listCameraSpawn.Length - 1)
+        {
+            _indexListCameraSpawn = 0;
+        } else
+        {
+            _indexListCameraSpawn ++;
+        }
+    }
+
     /// <summary>
     /// Spawns the vehicle with the starting block's position and rotation
     /// </summary>
@@ -91,7 +182,21 @@ public class RaceManager : MonoBehaviour
             this.currVehicle = Instantiate(this.gameManager.SelectedVehiclePrefab, currMapScript.StartBlock.transform.position, currMapScript.StartBlock.transform.rotation);
             this.currVehicle.GetComponent<Rigidbody>().isKinematic = true;
             GameObject.Find("Main Camera").GetComponent<Camera>().enabled = true;
-            GameObject.Find("CamParent").GetComponent<CarCam>().enabled = true;
+            _camParent = GameObject.Find("CamParent");
+            _startingCamParent = GameObject.Find("StartingCamParent");
+
+            if (_startingCamParent != null)
+            {
+                _positionCameraBase = _startingCamParent.transform.position;
+                //_camParent.GetComponent<CarCam>().enabled = true;
+                _startingCamera = GameObject.Find("StartingCamera")?.GetComponent<Camera>();
+
+                if(_startingCamera != null)
+                {
+                    _startingCamera.enabled = true;
+                    _isCameraRotating = true;
+                }
+            }
         }
         catch (System.Exception e)
         {
@@ -113,12 +218,6 @@ public class RaceManager : MonoBehaviour
         {
             Debug.LogWarning($"Exception while instantiating the ghist.\r\nException message : {e.Message}");
         }
-
-        if (this.currVehicle != null)
-        {
-            displayScript.IsCountdown = true; 
-        }
-
     }
 
     /// <summary>
