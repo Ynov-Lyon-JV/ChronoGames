@@ -116,6 +116,11 @@ public class RaceManager : MonoBehaviour
     }
     #endregion
 
+    public Map getcurrMapScript()
+    {
+        return this.currMapScript;
+    }
+
     public void StartRace()
     {
         displayScript.IsCountdown = true;

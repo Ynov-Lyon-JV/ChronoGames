@@ -4880,7 +4880,7 @@ GameObject:
   - component: {fileID: 7295153032570791847}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5006,7 +5006,6 @@ GameObject:
   - component: {fileID: 2907878694008386664}
   - component: {fileID: 2899704652223455196}
   - component: {fileID: 7716339557353693263}
-  - component: {fileID: 916454978482283975}
   m_Layer: 0
   m_Name: StartingCamera
   m_TagString: Untagged
@@ -5073,14 +5072,6 @@ Camera:
   m_StereoSeparation: 0.022
 --- !u!124 &7716339557353693263
 Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4174267016834558932}
-  m_Enabled: 1
---- !u!81 &916454978482283975
-AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -10633,7 +10624,7 @@ GameObject:
   - component: {fileID: 8837888696717794777}
   m_Layer: 0
   m_Name: BMW
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     private float verticalInput;
     private float horizontalInput;
     private bool isHandbrake = false;
+    private bool respawnInput = false;
 
     private float verticalInputController;
     private bool isHandbrakeController = false;
@@ -17,6 +18,7 @@ public class InputManager : MonoBehaviour
     public float VerticalInput { get => verticalInput; set => verticalInput = value; }
     public float HorizontalInput { get => horizontalInput; set => horizontalInput = value; }
     public bool IsHandbrake { get => isHandbrake; set => isHandbrake = value; }
+    public bool RespawnInput { get => respawnInput; set => respawnInput = value; }
     public float VerticalInputController { get => verticalInputController; set => verticalInputController = value; }
     public bool IsHandbrakeController { get => isHandbrakeController; set => isHandbrakeController = value; }
     #endregion
@@ -26,8 +28,9 @@ public class InputManager : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
         isHandbrake = Input.GetAxis("Handbrake") != 0;
+        RespawnInput = Input.GetAxis("Respawn") != 0; 
 
-        verticalInputController = Input.GetAxis("VerticalController");
+         verticalInputController = Input.GetAxis("VerticalController");
         isHandbrakeController = Input.GetAxis("HandbrakeController") != 0;
     }
 }

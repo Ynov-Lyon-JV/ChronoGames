@@ -27,6 +27,7 @@ public class VehicleController : MonoBehaviour
 
     [Header("Components and child components")]
     private Rigidbody rb;
+    private RaceManager raceManager;
     private ParticleSystem[] particulesSmoke;
     private ExplodingRear[] myExplodingRears;
     [HideInInspector] public GameObject wheelMeshes, wheelColliders;
@@ -102,6 +103,8 @@ public class VehicleController : MonoBehaviour
     {
         GetObjects();
         StartCoroutine(TimedLoop());
+        particulesSmoke = Resources.FindObjectsOfTypeAll<ParticleSystem>();
+        raceManager = GameObject.Find("RaceManager").GetComponent<RaceManager>();
         ActiveSmokeOnDrift();
 
         // Unlock Vehicule to drive :
@@ -139,14 +142,20 @@ public class VehicleController : MonoBehaviour
         }
     }
 
-    private void ExplodeRears()
+    private void resetForce()
     {
-        foreach (ExplodingRear element in myExplodingRears)
-            element.Explode();
+        rb.isKinematic = true;
+        rb.isKinematic = false;
     }
 
     void FixedUpdate()
     {
+        if(im.RespawnInput && raceManager.getcurrMapScript().LastCP != null)
+        {
+            resetForce();
+            gameObject.transform.position = raceManager.getcurrMapScript().LastCP.transform.position;
+            gameObject.transform.rotation = raceManager.getcurrMapScript().LastCP.transform.rotation;
+        }
         AnimateWheels();
         SimulateGravity();
         SteerVehicle();
