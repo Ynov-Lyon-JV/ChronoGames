@@ -186,7 +186,7 @@ public class RaceManager : MonoBehaviour
         {
             this.currVehicle = Instantiate(this.gameManager.SelectedVehiclePrefab, currMapScript.StartBlock.transform.position, currMapScript.StartBlock.transform.rotation);
             this.currVehicle.GetComponent<Rigidbody>().isKinematic = true;
-           // GameObject.Find("Main Camera").GetComponent<Camera>().enabled = true;
+            GameObject.Find("Main Camera").GetComponent<Camera>().enabled = true;
             _camParent = GameObject.Find("CamParent");
             _startingCamera = GameObject.Find("StartingCamera")?.GetComponent<Camera>();
 
