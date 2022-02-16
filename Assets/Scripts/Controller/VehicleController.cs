@@ -485,6 +485,12 @@ public class VehicleController : MonoBehaviour
         }
 
     }
+
+    private void ExplodeRears()
+    {
+        foreach (ExplodingRear element in myExplodingRears)
+            element.Explode();
+    }
     #endregion
 
     private void GetObjects()

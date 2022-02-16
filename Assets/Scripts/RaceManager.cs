@@ -27,11 +27,11 @@ public class RaceManager : MonoBehaviour
     public bool StartRunning { get; private set; }
     private float _speed { get; set; }
     private bool _isCameraRotating { get; set; }
-    private GameObject? _camParent;
+    private GameObject _camParent;
     private Vector3 _positionCameraBase;
     private Camera _startingCamera;
-    private GameObject? _startingCamParent;
-    private GameObject? _startPanel;
+    private GameObject _startingCamParent;
+    private GameObject _startPanel;
     private GameObject[] _listCameraSpawn;
     private int _indexListCameraSpawn;
     private float _timerCameraSpawn;
@@ -146,7 +146,7 @@ public class RaceManager : MonoBehaviour
     {
         if(_startingCamera != null && _isCameraRotating)
         {
-            _startingCamera.transform.Rotate(0, _speed * Time.deltaTime, 0);
+            _startingCamera.transform.eulerAngles += new Vector3(0, _speed * Time.deltaTime, 0);
         } 
         else if(_startingCamera != null && _isCameraRotating == false)
         {
