@@ -68,7 +68,7 @@ public class EndRaceManager : MonoBehaviour
     public void SetLastTime()
     {
         lastTime = GameObject.Find("GameHUD").GetComponent<DisplayData>().TimerText.text;
-        txtLastTime.text = $"Last time : {lastTime}";
+        txtLastTime.text = $"Race time : {lastTime}";
 
         SetPBAndWR();
     }
