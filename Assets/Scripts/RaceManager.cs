@@ -108,7 +108,7 @@ public class RaceManager : MonoBehaviour
             displayScript.UpdateGear(currVehicle.GetComponent<VehicleController>().isReverse, currVehicle.GetComponent<VehicleController>().gearNum);
             displayScript.UpdateRPM(currVehicle.GetComponent<VehicleController>().engineRPM);
 
-            if (_startingCamParent != null && _isCameraRotating)
+            if (_startingCamera != null && _isCameraRotating)
             {
                 SpawnCamera();
             }
@@ -144,13 +144,13 @@ public class RaceManager : MonoBehaviour
     /// </summary>
     private void AnimationCameraBeforeStart()
     {
-        if(_startingCamParent != null && _isCameraRotating)
+        if(_startingCamera != null && _isCameraRotating)
         {
-            _startingCamParent.transform.Rotate(0, _speed * Time.deltaTime, 0);
+            _startingCamera.transform.Rotate(0, _speed * Time.deltaTime, 0);
         } 
-        else if(_startingCamParent != null && _isCameraRotating == false)
+        else if(_startingCamera != null && _isCameraRotating == false)
         {
-            _startingCamParent.transform.position = _positionCameraBase;
+            _startingCamera.transform.position = _positionCameraBase;
         }
     }
 
@@ -161,7 +161,7 @@ public class RaceManager : MonoBehaviour
         if(_timerCameraSpawn >= 5.0f)
         {
             GetNextCameraSpawn();
-            _startingCamParent.transform.position = _listCameraSpawn[_indexListCameraSpawn].transform.position;
+            _startingCamera.transform.position = _listCameraSpawn[_indexListCameraSpawn].transform.position;
             _timerCameraSpawn = 0;
         } 
     }
@@ -186,21 +186,19 @@ public class RaceManager : MonoBehaviour
         {
             this.currVehicle = Instantiate(this.gameManager.SelectedVehiclePrefab, currMapScript.StartBlock.transform.position, currMapScript.StartBlock.transform.rotation);
             this.currVehicle.GetComponent<Rigidbody>().isKinematic = true;
-            GameObject.Find("Main Camera").GetComponent<Camera>().enabled = true;
+           // GameObject.Find("Main Camera").GetComponent<Camera>().enabled = true;
             _camParent = GameObject.Find("CamParent");
-            _startingCamParent = GameObject.Find("StartingCamParent");
+            _startingCamera = GameObject.Find("StartingCamera")?.GetComponent<Camera>();
 
-            if (_startingCamParent != null)
+            if (_startingCamera != null)
             {
-                _positionCameraBase = _startingCamParent.transform.position;
+                _startingCamera.transform.position = new Vector3(this.currVehicle.transform.position.x, this.currVehicle.transform.position.y + 15, this.currVehicle.transform.position.z);
+                _startingCamera.transform.rotation = Quaternion.Euler(20, 0, 0);
+                _positionCameraBase = this.currVehicle.transform.position;
                 //_camParent.GetComponent<CarCam>().enabled = true;
-                _startingCamera = GameObject.Find("StartingCamera")?.GetComponent<Camera>();
 
-                if(_startingCamera != null)
-                {
-                    _startingCamera.enabled = true;
-                    _isCameraRotating = true;
-                }
+                _startingCamera.enabled = true;
+                _isCameraRotating = true;
             }
         }
         catch (System.Exception e)
