@@ -31,6 +31,8 @@ public class BlockCP : Block
         if (collider.gameObject.tag == "Player")
         {
             this.isPassed = true;
+
+            Debug.LogError(isPassed);
             IsLastCP();
         }
     } 
