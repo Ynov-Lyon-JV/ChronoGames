@@ -24,6 +24,7 @@ public class VehicleController : MonoBehaviour
 
     private InputManager im;
     private Rigidbody rb;
+    private RaceManager raceManager;
     private ParticleSystem[] particulesSmoke;
     public GameObject wheelMeshes, wheelColliders;
 
@@ -78,6 +79,7 @@ public class VehicleController : MonoBehaviour
         GetObjects();
         StartCoroutine(TimedLoop());
         particulesSmoke = Resources.FindObjectsOfTypeAll<ParticleSystem>();
+        raceManager = GameObject.Find("RaceManager").GetComponent<RaceManager>();
         ActiveSmokeOnDrift();
 
         // Unlock Vehicule to drive :
@@ -115,8 +117,20 @@ public class VehicleController : MonoBehaviour
         }
     }
 
-void FixedUpdate()
+    private void resetForce()
     {
+        rb.isKinematic = true;
+        rb.isKinematic = false;
+    }
+
+    void FixedUpdate()
+    {
+        if(im.RespawnInput && raceManager.getcurrMapScript().LastCP != null)
+        {
+            resetForce();
+            gameObject.transform.position = raceManager.getcurrMapScript().LastCP.transform.position;
+            gameObject.transform.rotation = raceManager.getcurrMapScript().LastCP.transform.rotation;
+        }
         AnimateWheels();
         AddDownforce();
         SteerVehicle();

@@ -32,7 +32,6 @@ public class BlockCP : Block
         {
             this.isPassed = true;
 
-            Debug.LogError(isPassed);
             IsLastCP();
         }
     } 
