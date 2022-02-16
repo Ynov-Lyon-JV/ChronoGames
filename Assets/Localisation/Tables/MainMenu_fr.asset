@@ -46,5 +46,25 @@ MonoBehaviour:
     m_Localized: Editeur
     m_Metadata:
       m_Items: []
+  - m_Id: 30424762093002752
+    m_Localized: "Voulez-vous charger une carte ou en cr\xE9er une nouvelle ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30425813160419328
+    m_Localized: Charger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30425860497334272
+    m_Localized: Nouvelle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30433631372435456
+    m_Localized: Annuler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30466493509394432
+    m_Localized: "S\xE9lectionnez la carte \xE0 charger"
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

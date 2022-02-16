@@ -46,5 +46,25 @@ MonoBehaviour:
     m_Localized: Editor
     m_Metadata:
       m_Items: []
+  - m_Id: 30424762093002752
+    m_Localized: Do you want to load a map or create a new one ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30425813160419328
+    m_Localized: Load
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30425860497334272
+    m_Localized: New
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30433631372435456
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30466493509394432
+    m_Localized: Select the map to load
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

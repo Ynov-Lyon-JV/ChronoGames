@@ -10,10 +10,13 @@ public class MainMenuManager : MonoBehaviour
 {
     #region Fields
 
-    private GameObject optionMenuPanel;
-    private GameObject mainMenuPanel;
-    private PanelOpener optionPanelOpener;
-    private PanelOpener mainMenuPanelOpener;
+    private GameObject _optionMenuPanel;
+    private GameObject _mainMenuPanel;
+    private PanelOpener _optionPanelOpener;
+    private PanelOpener _mainMenuPanelOpener;
+
+    public GameObject newLoadPanel;
+    public GameObject fileSelectionPanel;
 
     #endregion
 
@@ -21,11 +24,11 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        optionMenuPanel = GameObject.Find("OptionMenuPanel");
-        optionPanelOpener = optionMenuPanel.GetComponent<PanelOpener>();
+        _optionMenuPanel = GameObject.Find("OptionMenuPanel");
+        _optionPanelOpener = _optionMenuPanel.GetComponent<PanelOpener>();
 
-        mainMenuPanel = GameObject.Find("MainMenuPanel");
-        mainMenuPanelOpener = mainMenuPanel.GetComponent<PanelOpener>();
+        _mainMenuPanel = GameObject.Find("MainMenuPanel");
+        _mainMenuPanelOpener = _mainMenuPanel.GetComponent<PanelOpener>();
     }
 
     #endregion
@@ -36,15 +39,43 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("SelectionScene");
     }
 
-    public void Edit()
+    public void DisplayPrompt(bool isOpen)
+    {
+        newLoadPanel.SetActive(isOpen);
+    }
+
+    public void DisplayFileSelection(bool isOpen)
+    {
+        if (newLoadPanel.activeInHierarchy)
+            newLoadPanel.SetActive(false);
+        fileSelectionPanel.SetActive(isOpen);
+    }
+
+    public void LoadEditor(int environment)
+    {
+        switch (environment)
+        {
+            case 0:
+                //Grass environment
+                break;
+            case 1:
+                //Desert environment
+                break;
+            default:
+                //Grass environment
+                break;
+        }
+    }
+
+    public void LoadEditor(string mapName)
     {
         SceneManager.LoadScene("MapEditorScene");
     }
 
     public void OpenCloseOptionPanel()
     {
-        mainMenuPanelOpener.OpenClosePanel();
-        optionPanelOpener.OpenClosePanel();
+        _mainMenuPanelOpener.OpenClosePanel();
+        _optionPanelOpener.OpenClosePanel();
     }
 
     public void Quit()
