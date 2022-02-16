@@ -57,7 +57,10 @@ public class CarCam : MonoBehaviour
             cameraAnimator.SetFloat("ConstantShake", 0 / 120);
 
         if (Magnitude - previousMagnitude < -2)
+        {
+            cameraAnimator.SetFloat("HitForce", -(Magnitude - previousMagnitude) / 40);
             cameraAnimator.SetTrigger("Hit");
+        }
 
         previousMagnitude = Magnitude;
     }

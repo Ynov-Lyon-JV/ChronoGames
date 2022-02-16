@@ -9933,7 +9933,7 @@ Transform:
   m_Children:
   - {fileID: 6865641690896085401}
   m_Father: {fileID: 8209407212657674082}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8928521841562322899
 MonoBehaviour:
@@ -10513,6 +10513,7 @@ Transform:
   - {fileID: 665859915530809145}
   - {fileID: 2290545807179217401}
   - {fileID: 2290545808071420413}
+  - {fileID: 5795398184919302432}
   - {fileID: 9199746327202953104}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -10638,7 +10639,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  myBaseGravity: 1
   myGravityOverAirtime:
     serializedVersion: 2
     m_Curve:
