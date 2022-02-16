@@ -517,5 +517,7 @@ public class VehicleController : MonoBehaviour
         centerOfMass = GameObject.Find("CenterOfMass");
         rb.centerOfMass = centerOfMass.transform.localPosition;
     }
+
+    public void DisableInputs() => im.ControlsBlocked = true;
     #endregion
 }

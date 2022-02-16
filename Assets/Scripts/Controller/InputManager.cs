@@ -23,14 +23,29 @@ public class InputManager : MonoBehaviour
     public bool IsHandbrakeController { get => isHandbrakeController; set => isHandbrakeController = value; }
     #endregion
 
+    public bool ControlsBlocked = false;
+
     private void FixedUpdate()
     {
-        verticalInput = Input.GetAxis("Vertical");
-        horizontalInput = Input.GetAxis("Horizontal");
-        isHandbrake = Input.GetAxis("Handbrake") != 0;
-        RespawnInput = Input.GetAxis("Respawn") != 0; 
+        if (!ControlsBlocked)
+        {
+            verticalInput = Input.GetAxis("Vertical");
+            horizontalInput = Input.GetAxis("Horizontal");
+            isHandbrake = Input.GetAxis("Handbrake") != 0;
+            RespawnInput = Input.GetAxis("Respawn") != 0;
 
-         verticalInputController = Input.GetAxis("VerticalController");
-        isHandbrakeController = Input.GetAxis("HandbrakeController") != 0;
+            verticalInputController = Input.GetAxis("VerticalController");
+            isHandbrakeController = Input.GetAxis("HandbrakeController") != 0;
+        }
+        else
+        {
+            verticalInput = 0;
+            horizontalInput = 0;
+            isHandbrake = false;
+            RespawnInput = false;
+
+            verticalInputController = 0;
+            isHandbrakeController = false;
+        }
     }
 }
