@@ -56,12 +56,13 @@ public class MainMenuManager : MonoBehaviour
         switch (environment)
         {
             case 0:
-                //Normal "stadium" environment
+                //Grass environment
                 break;
             case 1:
                 //Desert environment
                 break;
             default:
+                //Grass environment
                 break;
         }
     }
