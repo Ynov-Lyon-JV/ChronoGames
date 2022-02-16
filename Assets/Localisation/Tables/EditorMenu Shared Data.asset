@@ -51,6 +51,10 @@ MonoBehaviour:
     m_Key: BtnResetMap
     m_Metadata:
       m_Items: []
+  - m_Id: 22876818305581056
+    m_Key: LabelCheckpoint
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

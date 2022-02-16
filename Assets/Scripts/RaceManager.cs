@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,9 +28,10 @@ public class RaceManager : MonoBehaviour
     public bool StartRunning { get; private set; }
     private float _speed { get; set; }
     private bool _isCameraRotating { get; set; }
-    private GameObject _camParent;
+    private CarCam _camParent;
     private Vector3 _positionCameraBase;
     private Camera _startingCamera;
+    private Camera _endCamera;
     private GameObject _startingCamParent;
     private GameObject _startPanel;
     private GameObject[] _listCameraSpawn;
@@ -56,8 +58,10 @@ public class RaceManager : MonoBehaviour
         endRaceManager = GameObject.Find("EndManager").GetComponent<EndRaceManager>();
         _startPanel = GameObject.Find("StartPanel");
         _gameHUD = GameObject.Find("GameHUD");
+        _endCamera = GameObject.Find("EndCamera").GetComponent<Camera>();
+        _camParent = GameObject.Find("CamParent").GetComponent<CarCam>();
 
-        if(_gameHUD != null)
+        if (_gameHUD != null)
         {
             _gameHUD.SetActive(false);
         }
@@ -187,18 +191,28 @@ public class RaceManager : MonoBehaviour
             this.currVehicle = Instantiate(this.gameManager.SelectedVehiclePrefab, currMapScript.StartBlock.transform.position, currMapScript.StartBlock.transform.rotation);
             this.currVehicle.GetComponent<Rigidbody>().isKinematic = true;
             GameObject.Find("Main Camera").GetComponent<Camera>().enabled = true;
-            _camParent = GameObject.Find("CamParent");
             _startingCamera = GameObject.Find("StartingCamera")?.GetComponent<Camera>();
 
             if (_startingCamera != null)
             {
+                if (_endCamera != null)
+                {
+                    _endCamera.enabled = false;
+                }
+
                 _startingCamera.transform.position = new Vector3(this.currVehicle.transform.position.x, this.currVehicle.transform.position.y + 15, this.currVehicle.transform.position.z);
                 _startingCamera.transform.rotation = Quaternion.Euler(20, 0, 0);
                 _positionCameraBase = this.currVehicle.transform.position;
-                //_camParent.GetComponent<CarCam>().enabled = true;
 
-                _startingCamera.enabled = true;
+              /*  if(_camParent != null)
+                {
+                    _camParent.GetComponent<CarCam>().enabled = false;
+                }*/
+                switchCamera(CameraEnum.StartAnimationCam);
+
+                //_startingCamera.enabled = true;
                 _isCameraRotating = true;
+
             }
         }
         catch (System.Exception e)
@@ -223,6 +237,28 @@ public class RaceManager : MonoBehaviour
         }
     }
 
+    private void switchCamera(CameraEnum cameraEnum)
+    {
+        switch(cameraEnum)
+        {
+            case CameraEnum.StartAnimationCam:
+                _startingCamera.enabled = true;
+                _camParent.enabled = false;
+                _endCamera.enabled = false;
+                break;
+            case CameraEnum.CarCam:
+                _startingCamera.enabled = false;
+                _camParent.enabled = true;
+                _endCamera.enabled = false;
+                break;
+            case CameraEnum.EndCam:
+                _startingCamera.enabled = false;
+                _camParent.enabled = false;
+                _endCamera.enabled = true;
+                break;
+        }
+    }
+
     /// <summary>
     /// Spawns the vehicle with the last checkpoint's position and rotation
     /// </summary>
@@ -238,6 +274,14 @@ public class RaceManager : MonoBehaviour
     /// </summary>
     private void EndRaceWorkflow()
     {
+        Camera endCamera = GameObject.Find("EndCamera").GetComponent<Camera>();
+
+        if (endCamera != null)
+        {
+            _camParent.GetComponent<CarCam>().enabled = false;
+            endCamera.enabled = true;
+        }
+
         displayScript.IsRunning = false;
         //currVehicle.GetComponent<VehicleController>().enabled = false;
         currVehicle.GetComponent<VehicleController>().DisableInputs();
