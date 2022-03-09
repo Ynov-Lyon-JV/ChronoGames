@@ -54,5 +54,9 @@ MonoBehaviour:
     m_Localized: Azzera mappa
     m_Metadata:
       m_Items: []
+  - m_Id: 22876818305581056
+    m_Localized: Punto di controllo
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
