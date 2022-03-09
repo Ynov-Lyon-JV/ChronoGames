@@ -111,7 +111,7 @@ public class RaceManager : MonoBehaviour
             displayScript.UpdateGear(currVehicle.GetComponent<VehicleController>().isReverse, currVehicle.GetComponent<VehicleController>().gearNum);
             displayScript.UpdateRPM(currVehicle.GetComponent<VehicleController>().engineRPM);
 
-            if (_startingCamera != null && _isCameraRotating)
+            if (_startingCamera != null && _isCameraRotating && _startingCamera.isActiveAndEnabled)
             {
                 SpawnCamera();
             }
