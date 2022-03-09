@@ -58,8 +58,6 @@ public class RaceManager : MonoBehaviour
         endRaceManager = GameObject.Find("EndManager").GetComponent<EndRaceManager>();
         _startPanel = GameObject.Find("StartPanel");
         _gameHUD = GameObject.Find("GameHUD");
-        _endCamera = GameObject.Find("EndCamera").GetComponent<Camera>();
-        _camParent = GameObject.Find("CamParent").GetComponent<CarCam>();
 
         if (_gameHUD != null)
         {
@@ -93,6 +91,7 @@ public class RaceManager : MonoBehaviour
         displayScript.UpdateLapData(currMapScript.CurrentLap.ToString(), currMapScript.TotLap.ToString());
 
         RetrievePBAndWR();
+        _endCamera = GameObject.Find("EndCamera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -189,6 +188,7 @@ public class RaceManager : MonoBehaviour
         try
         {
             this.currVehicle = Instantiate(this.gameManager.SelectedVehiclePrefab, currMapScript.StartBlock.transform.position, currMapScript.StartBlock.transform.rotation);
+            _camParent = GameObject.Find("CamParent").GetComponent<CarCam>();
             this.currVehicle.GetComponent<Rigidbody>().isKinematic = true;
             GameObject.Find("Main Camera").GetComponent<Camera>().enabled = true;
             _startingCamera = GameObject.Find("StartingCamera")?.GetComponent<Camera>();
