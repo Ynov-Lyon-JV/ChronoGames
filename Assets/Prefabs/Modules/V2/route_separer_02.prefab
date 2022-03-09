@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5433845449970521235}
   - component: {fileID: 3674282287210155040}
   - component: {fileID: 2166736845295276189}
+  - component: {fileID: 2796438842132783119}
   m_Layer: 0
   m_Name: mur_01 8
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2796438842132783119
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2445048849378389575}
+  m_Material: {fileID: 13400000, guid: fd6ecc7ab3ceea14692d212536b61ada, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9033215778661204849, guid: 6443bb8439cb84a47b0f3c487d94f59c, type: 3}
 --- !u!1 &3563959727281368588
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +107,7 @@ GameObject:
   - component: {fileID: 770469863938635742}
   - component: {fileID: 6223555572909143795}
   - component: {fileID: 7296022959723275823}
+  - component: {fileID: 572201636802280242}
   m_Layer: 0
   m_Name: mur_03 1
   m_TagString: Untagged
@@ -162,6 +178,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &572201636802280242
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563959727281368588}
+  m_Material: {fileID: 13400000, guid: fd6ecc7ab3ceea14692d212536b61ada, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7590058485478183906, guid: 6443bb8439cb84a47b0f3c487d94f59c, type: 3}
 --- !u!1 &3664822816280383175
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +203,7 @@ GameObject:
   - component: {fileID: 1230075932984450583}
   - component: {fileID: 2807768794406622071}
   - component: {fileID: 6744415859579513966}
+  - component: {fileID: 6619310767250602650}
   m_Layer: 0
   m_Name: base 8
   m_TagString: Untagged
@@ -245,6 +276,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6619310767250602650
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3664822816280383175}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5416504474800032579, guid: 6443bb8439cb84a47b0f3c487d94f59c, type: 3}
 --- !u!1 &5384450579921052150
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +315,7 @@ Transform:
   m_GameObject: {fileID: 5384450579921052150}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 44.21538, y: -0.26882797, z: -19.526203}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.959451, y: 1.959451, z: 1.959451}
   m_Children:
   - {fileID: 1230075932984450583}
   - {fileID: 5433845449970521235}
@@ -291,6 +336,7 @@ GameObject:
   - component: {fileID: 7068335955402991978}
   - component: {fileID: 8528140152557204323}
   - component: {fileID: 938618605633380717}
+  - component: {fileID: 3615855744441451089}
   m_Layer: 0
   m_Name: mur_02 8
   m_TagString: Untagged
@@ -361,6 +407,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3615855744441451089
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756311961765822741}
+  m_Material: {fileID: 13400000, guid: fd6ecc7ab3ceea14692d212536b61ada, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9217446064923765846, guid: 6443bb8439cb84a47b0f3c487d94f59c, type: 3}
 --- !u!1 &8150308551683979621
 GameObject:
   m_ObjectHideFlags: 0

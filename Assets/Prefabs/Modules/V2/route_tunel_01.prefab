@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8654074751270268689}
   - component: {fileID: 4779238238206830561}
   - component: {fileID: 6883457199776671278}
+  - component: {fileID: 7552382650108288520}
   m_Layer: 0
   m_Name: haut_tunel
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7552382650108288520
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604703667984137146}
+  m_Material: {fileID: 13400000, guid: fd6ecc7ab3ceea14692d212536b61ada, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4928803077460571901, guid: 6443bb8439cb84a47b0f3c487d94f59c, type: 3}
 --- !u!1 &5747182877700773390
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +107,7 @@ GameObject:
   - component: {fileID: 3483489541447795765}
   - component: {fileID: 4425754367234579973}
   - component: {fileID: 4754436019109181685}
+  - component: {fileID: 9000983418064919302}
   m_Layer: 0
   m_Name: base 13
   m_TagString: Untagged
@@ -164,6 +180,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &9000983418064919302
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5747182877700773390}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3822491858273615425, guid: 6443bb8439cb84a47b0f3c487d94f59c, type: 3}
 --- !u!1 &7529443475221126726
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +219,7 @@ Transform:
   m_GameObject: {fileID: 7529443475221126726}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.61145, y: -0.36839142, z: -9.070369}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.959451, y: 1.959451, z: 1.959451}
   m_Children:
   - {fileID: 8654074751270268689}
   - {fileID: 3576587907976666615}
@@ -241,6 +271,7 @@ GameObject:
   - component: {fileID: 579151325201736168}
   - component: {fileID: 3189318355749363521}
   - component: {fileID: 3019229460937445609}
+  - component: {fileID: 7300885642303046223}
   m_Layer: 0
   m_Name: mur_01 13
   m_TagString: Untagged
@@ -311,6 +342,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7300885642303046223
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8392029542714995204}
+  m_Material: {fileID: 13400000, guid: fd6ecc7ab3ceea14692d212536b61ada, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1845293506634060850, guid: 6443bb8439cb84a47b0f3c487d94f59c, type: 3}
 --- !u!1 &8578709909703613541
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +367,7 @@ GameObject:
   - component: {fileID: 448706375306638528}
   - component: {fileID: 8080355665629636814}
   - component: {fileID: 4170890761365722803}
+  - component: {fileID: 7257144153558368595}
   m_Layer: 0
   m_Name: mur_02 13
   m_TagString: Untagged
@@ -392,6 +438,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7257144153558368595
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8578709909703613541}
+  m_Material: {fileID: 13400000, guid: fd6ecc7ab3ceea14692d212536b61ada, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7026164141753221731, guid: 6443bb8439cb84a47b0f3c487d94f59c, type: 3}
 --- !u!1 &8727113831273300342
 GameObject:
   m_ObjectHideFlags: 0

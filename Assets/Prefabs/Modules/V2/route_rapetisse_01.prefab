@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4793479203209758566}
   - component: {fileID: 44097330056025783}
   - component: {fileID: 2306697694902228199}
+  - component: {fileID: 8071486890677928635}
   m_Layer: 0
   m_Name: base 6
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8071486890677928635
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979707526569117489}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 931999592523408451, guid: 6443bb8439cb84a47b0f3c487d94f59c, type: 3}
 --- !u!1 &3261407367809592798
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +109,7 @@ GameObject:
   - component: {fileID: 98553117689441761}
   - component: {fileID: 5784782653505781940}
   - component: {fileID: 7168177934457929635}
+  - component: {fileID: 6830677072913772707}
   m_Layer: 0
   m_Name: mur_02 6
   m_TagString: Untagged
@@ -165,6 +181,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6830677072913772707
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3261407367809592798}
+  m_Material: {fileID: 13400000, guid: fd6ecc7ab3ceea14692d212536b61ada, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6165745928187505001, guid: 6443bb8439cb84a47b0f3c487d94f59c, type: 3}
 --- !u!1 &6324574132391881064
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 7151334921593536582}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -49.55744, y: -0.2688277, z: -55.47704}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.959451, y: 1.959451, z: 1.959451}
   m_Children:
   - {fileID: 4793479203209758566}
   - {fileID: 7513277440476332613}
@@ -240,6 +270,7 @@ GameObject:
   - component: {fileID: 7513277440476332613}
   - component: {fileID: 2289811143087915133}
   - component: {fileID: 1353950556176983868}
+  - component: {fileID: 2156579758233694031}
   m_Layer: 0
   m_Name: mur_01 6
   m_TagString: Untagged
@@ -310,3 +341,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2156579758233694031
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7661674012954372785}
+  m_Material: {fileID: 13400000, guid: fd6ecc7ab3ceea14692d212536b61ada, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1035750312735822730, guid: 6443bb8439cb84a47b0f3c487d94f59c, type: 3}
