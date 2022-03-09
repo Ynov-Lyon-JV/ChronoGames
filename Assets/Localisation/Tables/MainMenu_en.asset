@@ -66,5 +66,13 @@ MonoBehaviour:
     m_Localized: Select the map to load
     m_Metadata:
       m_Items: []
+  - m_Id: 45653705104416768
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45653779188408320
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
