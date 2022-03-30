@@ -93,12 +93,22 @@ public class RaceManager : MonoBehaviour
         RetrievePBAndWR();
         _endCamera = GameObject.Find("EndCamera").GetComponent<Camera>();
         _startingCamera = GameObject.Find("StartingCamera")?.GetComponent<Camera>();
+        if (_endCamera != null)
+        {
+            _endCamera.enabled = false;
+        }
+        _isCameraRotating = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         StartRunning = displayScript.IsRunning;
+
+        if (_startingCamera != null && _isCameraRotating && _startingCamera.isActiveAndEnabled)
+        {
+            SpawnCamera();
+        }
 
         if (currVehicle != null)
         {
@@ -111,11 +121,6 @@ public class RaceManager : MonoBehaviour
             displayScript.UpdateSpeed(currVehicle.GetComponent<VehicleController>().kph);
             displayScript.UpdateGear(currVehicle.GetComponent<VehicleController>().isReverse, currVehicle.GetComponent<VehicleController>().gearNum);
             displayScript.UpdateRPM(currVehicle.GetComponent<VehicleController>().engineRPM);
-
-            if (_startingCamera != null && _isCameraRotating && _startingCamera.isActiveAndEnabled)
-            {
-                SpawnCamera();
-            }
         }
     }
     #endregion
@@ -166,6 +171,7 @@ public class RaceManager : MonoBehaviour
         {
             GetNextCameraSpawn();
             _startingCamera.transform.position = _listCameraSpawn[_indexListCameraSpawn].transform.position;
+            _startingCamera.transform.rotation = _listCameraSpawn[_indexListCameraSpawn].transform.rotation;
             _timerCameraSpawn = 0;
         } 
     }
@@ -211,7 +217,6 @@ public class RaceManager : MonoBehaviour
                 switchCamera(CameraEnum.StartAnimationCam);
 
                 //_startingCamera.enabled = true;
-                _isCameraRotating = true;
 
             }
         }
