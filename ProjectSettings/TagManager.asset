@@ -8,6 +8,7 @@ TagManager:
   - Module
   - CameraSpawn
   - Checkpoint
+  - DepartSpawn
   layers:
   - Default
   - TransparentFX

@@ -32,10 +32,7 @@ public class Map : MonoBehaviour
     void Awake()
     {
         cpList = GameObject.FindGameObjectsWithTag("Checkpoint");
-     /* if(lastCP != null)
-        {
-            lastCP.LinePassed += () => FinishLineWorkflow();
-        }*/
+        start = GameObject.FindGameObjectsWithTag("DepartSpawn")[0].GetComponent<BlockStart>();
 
         foreach (GameObject cp in cpList)
         {
