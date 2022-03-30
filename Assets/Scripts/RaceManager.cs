@@ -161,7 +161,7 @@ public class RaceManager : MonoBehaviour
     {
         _timerCameraSpawn += Time.deltaTime;
 
-        if(_timerCameraSpawn >= 5.0f)
+        if(_timerCameraSpawn >= 5.0f && _listCameraSpawn.Length > 0)
         {
             GetNextCameraSpawn();
             _startingCamera.transform.position = _listCameraSpawn[_indexListCameraSpawn].transform.position;
@@ -171,7 +171,7 @@ public class RaceManager : MonoBehaviour
 
     private void GetNextCameraSpawn()
     {
-        if(_indexListCameraSpawn == _listCameraSpawn.Length - 1)
+        if(_indexListCameraSpawn >= _listCameraSpawn.Length - 1)
         {
             _indexListCameraSpawn = 0;
         } else

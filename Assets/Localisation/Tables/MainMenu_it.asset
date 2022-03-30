@@ -66,5 +66,13 @@ MonoBehaviour:
     m_Localized: Seleziona la mappa da caricare
     m_Metadata:
       m_Items: []
+  - m_Id: 45653705104416768
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45653779188408320
+    m_Localized: Si
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

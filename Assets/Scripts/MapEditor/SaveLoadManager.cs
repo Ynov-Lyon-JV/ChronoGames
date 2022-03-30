@@ -19,17 +19,22 @@ public class SaveLoadManager : MonoBehaviour
     private ModuleManager _moduleManager;
 
     public Transform savePanel;
-    public Transform loadPanel;
+    public Transform fileAlreadyExistsPanel;
     public TMP_InputField mapNameSave;
-    public TMP_InputField mapNameLoad;
 
     private void Start()
     {
         savePanel.gameObject.SetActive(false);
-        loadPanel.gameObject.SetActive(false);
+        fileAlreadyExistsPanel.gameObject.SetActive(false);
         _editedMapPath = Path.Combine(_documentPath, EDITED_CHRONOGAME_FOLDER, EDITED_MAP_FOLDER, EDITED_EDITED_FOLDER);
 
         _moduleManager = FindObjectOfType<ModuleManager>();
+
+        _mapName = FindObjectOfType<GameManager>().SelectedMapName;
+        if (!string.IsNullOrEmpty(_mapName))
+        {
+            LoadMap();
+        }
     }
 
     public void SaveMap()
@@ -41,11 +46,21 @@ public class SaveLoadManager : MonoBehaviour
         savePanel.gameObject.SetActive(true);
     }
 
-    public void ValidateSave()
+    public void CheckIfFileExists()
     {
-        _mapName = mapNameSave.text;
+        _mapName = mapNameSave.text.ToLower();
         _finalPath = Path.Combine(_editedMapPath, _mapName + JSON_EXTENSION);
 
+        //Check if file already exists
+        if (File.Exists(_finalPath))
+        {
+            //Prompt "File already existing"
+            fileAlreadyExistsPanel.gameObject.SetActive(true);
+        }
+    }
+
+    public void ValidateSave()
+    { 
         //Gather all ObjectData objects
         ObjectData[] objects = FindObjectsOfType<ObjectData>();
         MapData mapData = new MapData();
@@ -67,26 +82,21 @@ public class SaveLoadManager : MonoBehaviour
         savePanel.gameObject.SetActive(false);
     }
 
+    public void CancelFileAlreadyExists()
+    {
+        fileAlreadyExistsPanel.gameObject.SetActive(false);
+    }
 
     public void CancelSave()
     {
-        mapNameLoad.text = String.Empty;
         savePanel.gameObject.SetActive(false);
         _moduleManager.enabled = true;
     }
 
     public void LoadMap()
     {
-        //Disable blocks placements etc...
         _moduleManager.enabled = false;
 
-        //Ask for map name
-        loadPanel.gameObject.SetActive(true);
-    }
-
-    public void ValidateLoad()
-    {
-        _mapName = mapNameLoad.text;
         _finalPath = Path.Combine(_editedMapPath, _mapName + JSON_EXTENSION);
 
         string json = File.ReadAllText(_finalPath);
@@ -94,12 +104,5 @@ public class SaveLoadManager : MonoBehaviour
 
         _moduleManager.InstantiateMap(data.ListObjectInfos);
         _moduleManager.enabled = true;
-        loadPanel.gameObject.SetActive(false);
-    }
-
-    public void CancelLoad()
-    {
-        _moduleManager.enabled = true;
-        loadPanel.gameObject.SetActive(false);
     }
 }
