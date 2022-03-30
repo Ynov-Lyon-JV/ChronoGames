@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private GameObject selectedVehiclePrefab;
     private int selectedMapIndex;
     private GameObject selectedMapPrefab;
+    private string selectedMapName;
 
     //Connectivity
     private bool isConnectedToInternet = false;
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
     public GameObject SelectedMapPrefab { get => selectedMapPrefab; }
     public int SelectedVehicleIndex { get => selectedVehicleIndex; set => SetVehicleIndexAndPrefab(value); }
     public int SelectedMapIndex { get => selectedMapIndex; set => SetMapIndexAndPrefab(value); }
+    public string SelectedMapName { get => selectedMapName; set => selectedMapName = value; }
 
     //Connectivity
     public bool IsConnectedToInternet { get => isConnectedToInternet; set => isConnectedToInternet = value; }

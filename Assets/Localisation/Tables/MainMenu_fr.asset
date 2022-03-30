@@ -66,5 +66,13 @@ MonoBehaviour:
     m_Localized: "S\xE9lectionnez la carte \xE0 charger"
     m_Metadata:
       m_Items: []
+  - m_Id: 45653705104416768
+    m_Localized: Non
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45653779188408320
+    m_Localized: Oui
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

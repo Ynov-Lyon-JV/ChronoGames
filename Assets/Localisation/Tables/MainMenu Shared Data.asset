@@ -63,6 +63,14 @@ MonoBehaviour:
     m_Key: SelectText
     m_Metadata:
       m_Items: []
+  - m_Id: 45653705104416768
+    m_Key: NoText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45653779188408320
+    m_Key: "YesText\t"
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
