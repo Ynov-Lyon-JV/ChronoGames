@@ -47,7 +47,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 30424762093002752
-    m_Localized: "Voulez-vous charger une carte ou en cr\xE9er une nouvelle ?"
+    m_Localized: Voulez-vous charger une carte ou en creer une nouvelle ?
     m_Metadata:
       m_Items: []
   - m_Id: 30425813160419328
@@ -63,7 +63,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 30466493509394432
-    m_Localized: "S\xE9lectionnez la carte \xE0 charger"
+    m_Localized: Selectionnez la carte a charger
     m_Metadata:
       m_Items: []
   - m_Id: 45653705104416768
