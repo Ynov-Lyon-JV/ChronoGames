@@ -1,11 +1,10 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Networking;
+﻿using SimpleJSON;
 using System.Collections;
-using System;
-using System.Text.RegularExpressions;
-using SimpleJSON;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Login : MonoBehaviour
 {
@@ -32,9 +31,9 @@ public class Login : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (username.GetComponent<InputField>().isFocused)
+            if (username.GetComponent<TMP_InputField>().isFocused)
             {
-                password.GetComponent<InputField>().Select();
+                password.GetComponent<TMP_InputField>().Select();
             }
         }
         if (Input.GetKeyDown(KeyCode.Return))
@@ -44,8 +43,8 @@ public class Login : MonoBehaviour
                 LoginButton();
             }
         }
-        Username = username.GetComponent<InputField>().text;
-        Password = password.GetComponent<InputField>().text;
+        Username = username.GetComponent<TMP_InputField>().text;
+        Password = password.GetComponent<TMP_InputField>().text;
     }
 
     #endregion
@@ -80,10 +79,10 @@ public class Login : MonoBehaviour
         yield return apiRequest.SendWebRequest();
 
 
-        if (apiRequest.isNetworkError || apiRequest.isHttpError)
+        if (apiRequest.result == UnityWebRequest.Result.ConnectionError || apiRequest.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.LogError(apiRequest.error);
-            ErrorMessage.text = "Identifants incorrects";
+            ErrorMessage.text = "Incorrect credentials";
         }
         else
         {
