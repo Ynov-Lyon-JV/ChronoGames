@@ -7,6 +7,7 @@ public class ResetPassword : MonoBehaviour
 {
     public GameObject email;
     private string Email;
+    public TMP_Text ErrorMessage;
     private bool EmailValid = false;
     private string[] Characters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
                                    "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
@@ -16,6 +17,7 @@ public class ResetPassword : MonoBehaviour
     public void ResetPasswordButton()
     {
         bool EM = false;
+        Email = email.GetComponent<TMP_InputField>().text;
 
         if (Email != "")
         {
@@ -52,10 +54,7 @@ public class ResetPassword : MonoBehaviour
         {
 
             //Requete inscription
-
             StartCoroutine(ResetUserPassword());
-
-            print("Registration Complete");
         }
 
     }
@@ -67,42 +66,32 @@ public class ResetPassword : MonoBehaviour
         form.AddField("email", Email);
 
         UnityWebRequest apiRequest = UnityWebRequest.Post(apiURL, form);
-        yield return apiRequest.SendWebRequest();
-
 
         if (apiRequest.result == UnityWebRequest.Result.ConnectionError || apiRequest.result == UnityWebRequest.Result.ProtocolError)
         {
-            Debug.LogError(apiRequest.error);
+            ErrorMessage.color = new Color(0.905f, 0.243f, 0.125f); //Orange
+            ErrorMessage.text = apiRequest.error;
         }
         else
         {
-            Debug.Log(apiRequest.responseCode);
+            ErrorMessage.color = new Color(0.412f, 0.906f, 0.125f); //Vert
+            ErrorMessage.text = "Reset mail sent";
             email.GetComponent<TMP_InputField>().text = "";
         }
+
+        yield return apiRequest.SendWebRequest();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Tab))
-        //{
-        //	if (username.GetComponent<InputField>().isFocused)
-        //	{
-        //		email.GetComponent<InputField>().Select();
-        //	}
-        //	if (email.GetComponent<InputField>().isFocused)
-        //	{
-        //		password.GetComponent<InputField>().Select();
-        //	}
-        //}
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (Email != "")
             {
-                ResetUserPassword();
+                ResetPasswordButton();
             }
         }
-        Email = email.GetComponent<TMP_InputField>().text;
     }
 
     void EmailValidation()

@@ -43,8 +43,6 @@ public class Login : MonoBehaviour
                 LoginButton();
             }
         }
-        Username = username.GetComponent<TMP_InputField>().text;
-        Password = password.GetComponent<TMP_InputField>().text;
     }
 
     #endregion
@@ -53,13 +51,16 @@ public class Login : MonoBehaviour
 
     public void LoginButton()
     {
-        if (Username == "")
+        Username = username.GetComponent<TMP_InputField>().text;
+        Password = password.GetComponent<TMP_InputField>().text;
+
+        if (string.IsNullOrEmpty(Username))
         {
-            Debug.LogWarning("Username Field Empty");
+            ErrorMessage.text = "Username Field Empty";
         }
-        else if (Password == "")
+        else if (string.IsNullOrEmpty(Password))
         {
-            Debug.LogWarning("Password Field Empty");
+            ErrorMessage.text = "Password Field Empty";
         }
         else
         {
@@ -91,7 +92,6 @@ public class Login : MonoBehaviour
                 JSONNode jsonObj = JSON.Parse(apiRequest.downloadHandler.text); ;
                 string userToken = jsonObj["token"];
                 gm.UserToken = userToken;
-                Debug.Log(userToken);
                 gm.UserName = Username;
                 SceneManager.LoadScene("MainMenuScene");
             }
