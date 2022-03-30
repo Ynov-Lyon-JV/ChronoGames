@@ -5624,10 +5624,10 @@ MonoBehaviour:
   - 0.9
   - 0.4
   gearChangeSpeed:
-  - 30
-  - 65
-  - 90
-  - 105
+  - 40
+  - 85
+  - 100
+  - 125
   gearNum: 0
   enginePower:
     serializedVersion: 2
@@ -5642,8 +5642,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.24705355
     - serializedVersion: 3
-      time: 942.0754
-      value: 956.91425
+      time: 1228.7007
+      value: 941.7273
       inSlope: 0.036346022
       outSlope: 0.036346022
       tangentMode: 0
@@ -5651,13 +5651,13 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.65371644
     - serializedVersion: 3
-      time: 2507.8306
-      value: 1001.38495
-      inSlope: -0.001040796
-      outSlope: -0.001040796
+      time: 2529.8787
+      value: 986.198
+      inSlope: 0.010210466
+      outSlope: 0.010210466
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.85725844
       outWeight: 0.49752328
     - serializedVersion: 3
       time: 5096.465
