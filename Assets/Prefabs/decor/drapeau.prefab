@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 408877124828284753}
   - component: {fileID: 4041564824679389100}
   - component: {fileID: 6790050532254152228}
+  - component: {fileID: 4354242870649304173}
   m_Layer: 0
   m_Name: drapeau
   m_TagString: Untagged
@@ -82,3 +83,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4354242870649304173
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7688432516866468475}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02101551, y: 0.7336288, z: 0.174534}
+  m_Center: {x: 0, y: 0, z: 0}

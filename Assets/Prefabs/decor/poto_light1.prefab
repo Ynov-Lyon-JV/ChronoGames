@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3855130167726642592}
   - component: {fileID: 1186559688206048796}
   - component: {fileID: 5624709124132347421}
-  - component: {fileID: -4175625453082955177}
+  - component: {fileID: 6797979238547015508}
   m_Layer: 0
   m_Name: poto_light1
   m_TagString: Untagged
@@ -83,17 +83,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-4175625453082955177
-MeshCollider:
+--- !u!65 &6797979238547015508
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5915800963687820683}
-  m_Material: {fileID: 13400000, guid: fd6ecc7ab3ceea14692d212536b61ada, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2010263608618990122, guid: 53a445910bac234408fcb346d7f0125e, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.05496685, y: 0.77014774, z: 0.09272369}
+  m_Center: {x: 0, y: 0, z: 0}

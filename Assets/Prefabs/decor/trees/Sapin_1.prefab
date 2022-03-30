@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6181006582670875698}
   - component: {fileID: 7091061822534308759}
   - component: {fileID: 5011508448511993693}
+  - component: {fileID: 2618691945434274964}
   m_Layer: 0
   m_Name: Sapin_1
   m_TagString: Untagged
@@ -82,3 +83,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2618691945434274964
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6812969945194989192}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.13389644, y: 0.2746215, z: 0.1348905}
+  m_Center: {x: -0.00089452416, y: -0.000000007450581, z: 0.00044615567}
