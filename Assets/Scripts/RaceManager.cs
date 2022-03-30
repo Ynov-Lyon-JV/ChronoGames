@@ -92,6 +92,7 @@ public class RaceManager : MonoBehaviour
 
         RetrievePBAndWR();
         _endCamera = GameObject.Find("EndCamera").GetComponent<Camera>();
+        _startingCamera = GameObject.Find("StartingCamera")?.GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -191,7 +192,6 @@ public class RaceManager : MonoBehaviour
             _camParent = GameObject.Find("CamParent").GetComponent<CarCam>();
             this.currVehicle.GetComponent<Rigidbody>().isKinematic = true;
             GameObject.Find("Main Camera").GetComponent<Camera>().enabled = true;
-            _startingCamera = GameObject.Find("StartingCamera")?.GetComponent<Camera>();
 
             if (_startingCamera != null)
             {
