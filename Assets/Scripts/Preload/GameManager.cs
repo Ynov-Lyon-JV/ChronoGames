@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
 
         if (CheckToken())
         {
-            SceneManager.LoadScene("MainMenuScene");
+            SceneManager.LoadScene("LoginMenuScene");
         }
     }
     #endregion
