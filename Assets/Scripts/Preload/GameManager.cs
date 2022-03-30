@@ -77,38 +77,12 @@ public class GameManager : MonoBehaviour
             isConnectedToInternet = true;
         }
 
-#if UNITY_EDITOR
-        //Username
-        UserName = "Test";
-        // Token
-        UserToken = GetTokenFromFile();
         // Language
-        Language = "FR";
-#else
-        UserToken = "270c4c85d9d239f66a563deac1c65318ce2f9862e1576583d70069bff178c030";//System.Array.IndexOf(args, "-usertoken") != -1 ? args[System.Array.IndexOf(args, "-usertoken") + 1] : string.Empty;
-
-        // Test once launcher can pass parameters
-        // Retrieve arguments data
-        string[] args = System.Environment.GetCommandLineArgs();
-
-        if (args.Length > 0)
-	    {
-		    // Username
-            UserName = System.Array.IndexOf(args, "-username") != -1 ? args[System.Array.IndexOf(args, "-username") + 1] : string.Empty;
-            // Token
-            UserToken = "270c4c85d9d239f66a563deac1c65318ce2f9862e1576583d70069bff178c030";//System.Array.IndexOf(args, "-usertoken") != -1 ? args[System.Array.IndexOf(args, "-usertoken") + 1] : string.Empty;
-            // Language
-            Language = System.Array.IndexOf(args, "-language") != -1 ? args[System.Array.IndexOf(args, "-language") + 1] : string.Empty; 
-	    }
-
-
-#endif
-
-
+        //Language = "FR";
 
         if (CheckToken())
         {
-            SceneManager.LoadScene("MainMenuScene");
+            SceneManager.LoadScene("LoginMenuScene");
         }
     }
     #endregion

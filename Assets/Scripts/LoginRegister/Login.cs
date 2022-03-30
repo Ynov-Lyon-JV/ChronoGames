@@ -14,7 +14,7 @@ public class Login : MonoBehaviour
     public Text ErrorMessage;
     private string Username;
     private string Password;
-    private const string _AUTH_API = "https://chronogame.ydayslyon.fr/auth/login/";
+    private const string _AUTH_API = "https://chronogame.ydayslyon.fr/api/auth/login/";
 
     private GameManager gm;
     #endregion
