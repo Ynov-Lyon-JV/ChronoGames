@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8643159287416636663}
   - component: {fileID: 4637986342227757906}
   - component: {fileID: 7474153803051810712}
+  - component: {fileID: 77039499112769788}
   m_Layer: 0
   m_Name: Arbre4
   m_TagString: Untagged
@@ -82,3 +83,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &77039499112769788
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987350014211006029}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.11934673, y: 0.24361143, z: 0.154665}
+  m_Center: {x: 0, y: 0, z: 0}
