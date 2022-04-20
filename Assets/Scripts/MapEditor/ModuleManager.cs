@@ -70,6 +70,11 @@ public class ModuleManager : MonoBehaviour
 
                     if (_module == null)
                     {
+                        if (_selectedPrefab.transform.Find("EndCamera") != null)
+                        {
+                            _selectedPrefab.transform.Find("EndCamera").GetComponent<Camera>().enabled = false;
+                        }
+
                         _module = Instantiate(_selectedPrefab, position, _moduleRot).GetComponent<Module>();
                     }
 
