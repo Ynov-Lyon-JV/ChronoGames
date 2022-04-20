@@ -38,6 +38,7 @@ public class RaceManager : MonoBehaviour
     private int _indexListCameraSpawn;
     private float _timerCameraSpawn;
     private GameObject _gameHUD;
+    private List<string> _listCheckpointsTime;
 
     #endregion
 
@@ -51,6 +52,7 @@ public class RaceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _listCheckpointsTime = new List<string>();
         _timerCameraSpawn = 0;
         _indexListCameraSpawn = 0;
         _speed = -10;
@@ -87,7 +89,8 @@ public class RaceManager : MonoBehaviour
         displayScript.CountdownFinished += () => currVehicle.GetComponent<VehicleController>().enabled = true;
         currMapScript.EndRace += () => EndRaceWorkflow();
         currMapScript.EndLap += () => EndLapWorkflow();
-        
+        currMapScript.CheckPointTimer += () => CheckPointTimerWorkflow();
+
         displayScript.UpdateLapData(currMapScript.CurrentLap.ToString(), currMapScript.TotLap.ToString());
 
         RetrievePBAndWR();
@@ -302,7 +305,16 @@ public class RaceManager : MonoBehaviour
     private void EndLapWorkflow()
     {
         displayScript.UpdateLapData(currMapScript.CurrentLap.ToString(), currMapScript.TotLap.ToString());
-        displayScript.UpdateLastLapTime();
+    }
+
+    /// <summary>
+    /// Function called when the checkpoint is passed
+    /// </summary>
+    private void CheckPointTimerWorkflow()
+    {
+       string checkpointTime = displayScript.UpdateCheckPointLapTime(_listCheckpointsTime.Count );
+
+        _listCheckpointsTime.Add(checkpointTime);
     }
 
     private void RetrievePBAndWR()

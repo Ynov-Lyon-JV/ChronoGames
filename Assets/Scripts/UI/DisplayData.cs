@@ -10,7 +10,7 @@ public class DisplayData : MonoBehaviour
     [SerializeField] private Text timerText;
     [SerializeField] private Text countdownText;
     [SerializeField] private Text lapDataText;
-    [SerializeField] private Text lastLapTimeText;
+    [SerializeField] private Text CheckPointLapTimeText;
     [SerializeField] private Text speedText;
     [SerializeField] private Text gearText;
     [SerializeField] private Image RPMBar;
@@ -133,11 +133,13 @@ public class DisplayData : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates the display of last lap's time
+    /// Updates the display of Checkpoint's time
     /// </summary>
-    public void UpdateLastLapTime()
+    public string UpdateCheckPointLapTime(int checkpointIndex)
     {
-        lastLapTimeText.text = $"Last lap : {FormatTimeToString(currTime)}";
+        CheckPointLapTimeText.text += $"\nCheckPoint {checkpointIndex} : {FormatTimeToString(currTime)}";
+
+        return FormatTimeToString(currTime);
     }
 
     /// <summary>

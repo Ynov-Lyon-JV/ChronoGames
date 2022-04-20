@@ -26,6 +26,7 @@ public class Map : MonoBehaviour
     public delegate void EventHandler();
     public event EventHandler EndRace;
     public event EventHandler EndLap;
+    public event EventHandler CheckPointTimer;
     #endregion
 
     #region Unity Methods
@@ -34,10 +35,15 @@ public class Map : MonoBehaviour
         cpList = GameObject.FindGameObjectsWithTag("Checkpoint");
         start = GameObject.FindGameObjectsWithTag("DepartSpawn")[0].GetComponent<BlockStart>();
 
+        int i = 0;
         foreach (GameObject cp in cpList)
         {
             BlockCP blockCp = (BlockCP) cp.GetComponent<BlockCP>();
+            blockCp.Id = i;
             blockCp.IsLastCP += () => CheckEndRace(blockCp);
+            blockCp.FinishLineWorkflow += () => FinishLineWorkflow();
+
+            i++;
         }
         
         if (!isMultilap)
@@ -78,7 +84,14 @@ public class Map : MonoBehaviour
     private void CheckEndRace(BlockCP _cp)
     {
         lastCP = _cp;
-        FinishLineWorkflow();
+        BlockCP? blockCp = (BlockCP)cpList[_cp.Id].GetComponent<BlockCP>();
+
+        if (blockCp != null && !blockCp.IsPassed)
+        {
+            // Update time checkpoint
+            CheckPointTimer();
+        }
+
     }
 
     /// <summary>
