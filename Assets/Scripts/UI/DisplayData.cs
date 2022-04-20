@@ -13,7 +13,7 @@ public class DisplayData : MonoBehaviour
     [SerializeField] private Text lastLapTimeText;
     [SerializeField] private Text speedText;
     [SerializeField] private Text gearText;
-    [SerializeField] private Text rpmText;
+    [SerializeField] private Image RPMBar;
 
     private double currTime;
     private float currCountdown;
@@ -22,6 +22,7 @@ public class DisplayData : MonoBehaviour
 
     [SerializeField] private bool isRunning = false;
     [SerializeField] private bool isCountdown = false;
+    
     #endregion
 
     #region Properties
@@ -155,7 +156,7 @@ public class DisplayData : MonoBehaviour
 
     public void UpdateRPM(float rpm)
     {
-        rpmText.text = Mathf.FloorToInt(rpm).ToString();
+        RPMBar.fillAmount = rpm / 5000f;
     }
     #endregion
 }
