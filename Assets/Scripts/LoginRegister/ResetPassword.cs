@@ -11,7 +11,7 @@ public class ResetPassword : MonoBehaviour
     private string[] Characters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
                                    "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
                                    "1","2","3","4","5","6","7","8","9","0","_","-"};
-    private const string _AUTH_API = "https://chronogame.ydayslyon.fr/auth/password_reset/";
+    private const string _AUTH_API = "https://chronogame.ydayslyon.fr/api/auth/password_reset/";
 
     public void ResetPasswordButton()
     {
@@ -70,7 +70,7 @@ public class ResetPassword : MonoBehaviour
         yield return apiRequest.SendWebRequest();
 
 
-        if (apiRequest.isNetworkError || apiRequest.isHttpError)
+        if (apiRequest.result == UnityWebRequest.Result.ConnectionError || apiRequest.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.LogError(apiRequest.error);
         }
