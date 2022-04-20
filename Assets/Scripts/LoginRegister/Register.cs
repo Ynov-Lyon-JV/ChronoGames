@@ -14,6 +14,7 @@ public class Register : MonoBehaviour
     private string Email;
     private string Password;
     private string ConfPassword;
+    public TMP_Text ErrorMessage;
     private string form;
     private bool EmailValid = false;
     private string[] Characters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
@@ -100,11 +101,7 @@ public class Register : MonoBehaviour
         {
 
             //Requete inscription
-
             StartCoroutine(CreateAccount());
-
-
-            print("Registration Complete");
         }
 
     }
@@ -119,12 +116,11 @@ public class Register : MonoBehaviour
         form.AddField("password2", ConfPassword);
 
         UnityWebRequest apiRequest = UnityWebRequest.Post(apiURL, form);
-        yield return apiRequest.SendWebRequest();
 
-
-        if (apiRequest.isNetworkError || apiRequest.isHttpError)
+        if (apiRequest.result == UnityWebRequest.Result.ConnectionError || apiRequest.result == UnityWebRequest.Result.ProtocolError)
         {
-            Debug.LogError(apiRequest.error);
+            ErrorMessage.color = new Color(0.905f, 0.243f, 0.125f); //Orange
+            ErrorMessage.text = apiRequest.error;
         }
         else
         {
@@ -137,7 +133,11 @@ public class Register : MonoBehaviour
             email.GetComponent<TMP_InputField>().text = "";
             password.GetComponent<TMP_InputField>().text = "";
             confPassword.GetComponent<TMP_InputField>().text = "";
+
+            ErrorMessage.color = new Color(0.412f, 0.906f, 0.125f); //Vert
+            ErrorMessage.text = "Reset mail sent";
         }
+        yield return apiRequest.SendWebRequest();
     }
 
     // Update is called once per frame
