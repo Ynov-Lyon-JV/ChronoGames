@@ -12,7 +12,7 @@ public class ModuleManager : MonoBehaviour
     private Quaternion _moduleRot;
     private float _rotation = 0.0f;
 
-    private int _moduleSize = 50;
+    private int _moduleSize = 40;
     private int _gridSize = 10;
     private Module _module;
     private Module _lastModule;
