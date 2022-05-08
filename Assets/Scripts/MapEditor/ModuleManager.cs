@@ -13,7 +13,7 @@ public class ModuleManager : MonoBehaviour
     private float _rotation = 0.0f;
 
     private int _moduleSize = 40;
-    private int _gridSize = 10;
+    public int gridSize = 10;
     private Module _module;
     private Module _lastModule;
     private Module[,] _isPosTaken;
@@ -42,7 +42,7 @@ public class ModuleManager : MonoBehaviour
         _validator = FindObjectOfType<MapValidator>();
         _moduleRot = Quaternion.identity;
 
-        _isPosTaken = new Module[_gridSize, _gridSize];
+        _isPosTaken = new Module[gridSize, gridSize];
     }
 
     // Update is called once per frame
@@ -202,9 +202,9 @@ public class ModuleManager : MonoBehaviour
 
     public void ResetMap()
     {
-        for (int i = 0; i < _isPosTaken.Length / _gridSize; i++)
+        for (int i = 0; i < _isPosTaken.Length / gridSize; i++)
         {
-            for (int j = 0; j < _isPosTaken.Length / _gridSize; j++)
+            for (int j = 0; j < _isPosTaken.Length / gridSize; j++)
             {
                 if (_isPosTaken[i, j] != null)
                 {

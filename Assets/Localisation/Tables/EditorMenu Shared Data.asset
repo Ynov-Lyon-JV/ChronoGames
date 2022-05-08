@@ -55,6 +55,14 @@ MonoBehaviour:
     m_Key: LabelCheckpoint
     m_Metadata:
       m_Items: []
+  - m_Id: 52330485943050240
+    m_Key: LabelSaut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52330583758413824
+    m_Key: LabelRaptis
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

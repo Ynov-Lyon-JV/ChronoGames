@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VehicleController : MonoBehaviour
 {
@@ -103,7 +104,10 @@ public class VehicleController : MonoBehaviour
     {
         GetObjects();
         StartCoroutine(TimedLoop());
-        raceManager = GameObject.Find("RaceManager").GetComponent<RaceManager>();
+        if (SceneManager.GetActiveScene().name != "MapEditorScene")
+        {
+            raceManager = GameObject.Find("RaceManager").GetComponent<RaceManager>(); 
+        }
         ActiveSmokeOnDrift();
 
         // Unlock Vehicule to drive :

@@ -54,6 +54,6 @@ public class MapValidator : MonoBehaviour
         _fanwickTransform.GetComponentInChildren<Camera>().enabled = false;
         _fanwickTransform.GetComponentInChildren<CarCam>().enabled = false;
 
-        GameObject.Destroy(_fanwickTransform.gameObject);
+        //GameObject.Destroy(_fanwickTransform.gameObject);
     }
 }

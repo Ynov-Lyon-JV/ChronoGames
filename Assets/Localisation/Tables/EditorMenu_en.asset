@@ -58,5 +58,13 @@ MonoBehaviour:
     m_Localized: Checkpoint
     m_Metadata:
       m_Items: []
+  - m_Id: 52330485943050240
+    m_Localized: Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52330583758413824
+    m_Localized: Shrink
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

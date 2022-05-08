@@ -31,11 +31,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7218008215642112
-    m_Localized: "D\xE9part"
+    m_Localized: Depart
     m_Metadata:
       m_Items: []
   - m_Id: 7218117460484096
-    m_Localized: "Arriv\xE9e"
+    m_Localized: Arrivee
     m_Metadata:
       m_Items: []
   - m_Id: 7218161752334336
@@ -56,6 +56,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 22876818305581056
     m_Localized: Checkpoint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52330485943050240
+    m_Localized: Saut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52330583758413824
+    m_Localized: Raptis'
     m_Metadata:
       m_Items: []
   references:

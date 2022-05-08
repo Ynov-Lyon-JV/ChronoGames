@@ -20,7 +20,6 @@ public class LoadMap : MonoBehaviour
     public void Load()
     {
         _gameManager.SelectedMapName = _mapName;
-        _gameManager.SelectedMapId = 500; //Change with real map ID 
         if (isEditor)
         {
             SceneManager.LoadScene("MapEditorScene"); 
