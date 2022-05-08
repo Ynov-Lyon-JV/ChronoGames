@@ -6,8 +6,12 @@ using UnityEngine;
 public class MapData
 {
     private List<ObjectInfo> _listObjectInfos = new List<ObjectInfo>();
+    private bool _validated;
+    private int _index;
 
     public List<ObjectInfo> ListObjectInfos { get => _listObjectInfos; set => _listObjectInfos = value; }
+    public bool Validated { get => _validated; set => _validated = value; } 
+    public int Index { get => _index; set => _index = value;}
 }
 
 [System.Serializable]

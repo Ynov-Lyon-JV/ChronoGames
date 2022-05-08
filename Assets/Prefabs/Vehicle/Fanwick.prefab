@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 80598103543723601}
   - component: {fileID: 7216351933704615427}
   m_Layer: 0
-  m_Name: Fenwick_new
+  m_Name: Fanwick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

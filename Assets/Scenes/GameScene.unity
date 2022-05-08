@@ -1352,7 +1352,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1758987779}
-  m_RootOrder: 3
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3692,7 +3692,7 @@ RectTransform:
   - {fileID: 833853364}
   - {fileID: 687609984}
   m_Father: {fileID: 1758987779}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4464,6 +4464,8 @@ RectTransform:
   - {fileID: 1257752755}
   - {fileID: 482638492}
   - {fileID: 1368450557}
+  - {fileID: 201122967}
+  - {fileID: 684503263}
   m_Father: {fileID: 937474930}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4495,6 +4497,53 @@ MonoBehaviour:
   countdownTextThreshold: 0.7
   isRunning: 0
   isCountdown: 1
+--- !u!1 &1770968075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1770968076}
+  - component: {fileID: 1770968077}
+  m_Layer: 0
+  m_Name: Map
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1770968076
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770968075}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1770968077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770968075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6face201ab81bca48aa7cc976c883ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: {fileID: 0}
+  finish: {fileID: 0}
+  isMultilap: 0
+  totLap: 0
 --- !u!1 &1781447604
 GameObject:
   m_ObjectHideFlags: 0
@@ -4932,6 +4981,7 @@ MonoBehaviour:
   displayScript: {fileID: 1758987780}
   ghostPrefab: {fileID: 2259002444071133010, guid: b4c28bb338d9aaf49b41462cefc0cb11,
     type: 3}
+  _mapTransform: {fileID: 1770968076}
 --- !u!4 &1823899678
 Transform:
   m_ObjectHideFlags: 0

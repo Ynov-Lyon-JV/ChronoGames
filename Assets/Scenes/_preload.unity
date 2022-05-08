@@ -183,14 +183,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vehicles:
   - {fileID: 80598103543723600, guid: 3182c6e056f01344a98e23d6cdc9480f, type: 3}
-  - {fileID: 8837888696717794776, guid: 5fb6f616110a4414c80bb98573c14e1c, type: 3}
-  - {fileID: 8837888696717794776, guid: 7f9773bc1a1b65442ac37f40d7d07ee0, type: 3}
   - {fileID: 8837888696717794776, guid: 5048af933660995498cc95a594bc3424, type: 3}
   - {fileID: 8837888696717794776, guid: f2cd0182a0007af458990151437e39c1, type: 3}
+  - {fileID: 8837888696717794776, guid: 7f9773bc1a1b65442ac37f40d7d07ee0, type: 3}
+  - {fileID: 8837888696717794776, guid: 5fb6f616110a4414c80bb98573c14e1c, type: 3}
   - {fileID: 8837888696717794776, guid: 1e6e184b34429ac46a751ddacaf5be4d, type: 3}
-  maps:
-  - {fileID: 5102291048596196928, guid: 9f0af71cb9195d44bad1fe804a785b33, type: 3}
-  - {fileID: 1630981253718127110, guid: 17e1b5bf6a41c234da5ca0f956e3d971, type: 3}
   modules:
   - {fileID: 6263522535612210624, guid: 68a4022145ec57341b5fe1fee25dd10d, type: 3}
   - {fileID: 2130465517523252209, guid: 018908d3ef521734eafeccdcd2b11d43, type: 3}

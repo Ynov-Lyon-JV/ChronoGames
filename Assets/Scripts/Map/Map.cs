@@ -6,17 +6,17 @@ public class Map : MonoBehaviour
 {
     #region Fields
     [SerializeField] private BlockStart start;
-    [SerializeField] private BlockFinish finish;
     private GameObject[] cpList;
     [SerializeField] private bool isMultilap = false;
     [SerializeField] private int totLap;
     private BlockCP lastCP;
     private int currentLap = 1;
+
+    public bool isValidating = false;
     #endregion
 
     #region Properties
     public BlockStart StartBlock { get => start; }
-    public BlockFinish Finish { get => finish; }
     public BlockCP LastCP { get => lastCP; }
     public int TotLap { get => totLap; }
     public int CurrentLap { get => currentLap; }
@@ -25,12 +25,11 @@ public class Map : MonoBehaviour
     #region Events
     public delegate void EventHandler();
     public event EventHandler EndRace;
-    public event EventHandler EndLap;
     public event EventHandler CheckPointTimer;
     #endregion
 
     #region Unity Methods
-    void Awake()
+    public void SetMapDatas()
     {
         cpList = GameObject.FindGameObjectsWithTag("Checkpoint");
         start = GameObject.FindGameObjectsWithTag("DepartSpawn")[0].GetComponent<BlockStart>();
@@ -64,16 +63,14 @@ public class Map : MonoBehaviour
     {
         if (CheckCPs())
         {
-           // if (currentLap == totLap)
-          //  {
-                EndRace();
-           /* }
+            if (isValidating)
+            {
+                FindObjectOfType<MapValidator>().ValidateMap();
+            }
             else
             {
-                currentLap++;
-                ResetCheckpoints();
-                EndLap();
-            }*/
+                EndRace();
+            }
         }
     }
 
@@ -86,7 +83,7 @@ public class Map : MonoBehaviour
         lastCP = _cp;
         BlockCP? blockCp = (BlockCP)cpList[_cp.Id].GetComponent<BlockCP>();
 
-        if (blockCp != null && !blockCp.IsPassed)
+        if (blockCp != null && !blockCp.IsPassed && !isValidating)
         {
             // Update time checkpoint
             CheckPointTimer();

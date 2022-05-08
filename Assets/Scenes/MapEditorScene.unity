@@ -631,7 +631,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 106646227}
   m_OnClick:
     m_PersistentCalls:
@@ -2108,6 +2108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab26f98ec1d7ea4e9cf3fe075b1b1b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  map: {fileID: 2066635407}
+  fanwick: {fileID: 80598103543723600, guid: 3182c6e056f01344a98e23d6cdc9480f, type: 3}
+  cam: {fileID: 963194227}
+  ui: {fileID: 1184177885}
 --- !u!1 &619974896
 GameObject:
   m_ObjectHideFlags: 1
@@ -4081,6 +4085,7 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 8
+  _mapTransform: {fileID: 2066635406}
 --- !u!1 &1315506774
 GameObject:
   m_ObjectHideFlags: 0
@@ -5441,6 +5446,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051162708}
   m_CullTransparentMesh: 1
+--- !u!1 &2066635405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2066635406}
+  - component: {fileID: 2066635407}
+  m_Layer: 0
+  m_Name: Map
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2066635406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066635405}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2066635407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066635405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6face201ab81bca48aa7cc976c883ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: {fileID: 0}
+  isMultilap: 0
+  totLap: 0
+  isValidating: 1
 --- !u!1 &2091622640
 GameObject:
   m_ObjectHideFlags: 0

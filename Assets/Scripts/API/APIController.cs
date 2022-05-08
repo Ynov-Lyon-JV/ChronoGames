@@ -108,7 +108,8 @@ public class APIController : MonoBehaviour
         if (apiRequest.isNetworkError || apiRequest.isHttpError)
         {
             Debug.LogError(apiRequest.error);
-            yield break;
+            //Set times to ultra high values
+            //yield break;
         }
 
         jsonObj = JSON.Parse(apiRequest.downloadHandler.text);
@@ -172,7 +173,7 @@ public class APIController : MonoBehaviour
                 PBUpdated();
             }
         }
-        if (jsonObj["count"] == 0)
+        if (jsonObj["count"] == 0 || jsonObj["count"] == null)
         {
             if (type == "WR")
             {

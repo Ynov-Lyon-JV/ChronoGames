@@ -5,9 +5,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using System.IO;
+using System;
 
 public class SelectionMenuManager : MonoBehaviour
 {
+    #region Constantes
+
+    private const string EDITED_CHRONOGAME_FOLDER = "chronogame";
+    private const string EDITED_MAP_FOLDER = "maps";
+    private const string EDITED_EDITED_FOLDER = "edited";
+
+    #endregion
+
     #region Fields
     private TMP_Dropdown ddVehicles;
     private TMP_Dropdown ddMaps;
@@ -21,12 +31,24 @@ public class SelectionMenuManager : MonoBehaviour
     private bool isPBNotNull;
     private bool isWRNotNull;
     private Toggle cbIsGhost;
+
+    private string _documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+    private string _mapPath;
+
+    public GameObject mapSelectionPanel;
+    public Transform contentPanel;
+    public GameObject mapItem;
+
+    public GameObject carSelectionPanel;
+
     #endregion
 
     #region Unity Methods
     // Start is called before the first frame update
     void Start()
     {
+        _mapPath = Path.Combine(_documentPath, EDITED_CHRONOGAME_FOLDER, EDITED_MAP_FOLDER, EDITED_EDITED_FOLDER);
+
         cbIsGhost = FindObjectOfType<Toggle>();
 
         spawnVehicleTransform = GameObject.Find("SpawnVehicle").transform;
@@ -36,67 +58,32 @@ public class SelectionMenuManager : MonoBehaviour
         apiController.PBUpdated += () => PBIsUpdated();
         apiController.WRUpdated += () => WRIsUpdated();
 
-        List<string> listName = new List<string>();
-        foreach (GameObject vehicle in gameManager.Vehicles)
-        {
-            listName.Add(vehicle.name);
-        }
+        //ddGhosts = ddList[0];
+        //InitialiseDDGhosts();
 
-        List<string> listMapNames = new List<string>();
-        foreach (GameObject map in gameManager.Maps)
-        {
-            listMapNames.Add(map.name);
-        }
+        //apiController.GetTimeFromAPI(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, null);
+        //apiController.GetTimeFromAPI(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, gameManager.UserName);
 
-        TMP_Dropdown[] ddList = GetComponentsInChildren<TMP_Dropdown>();
-        ddVehicles = ddList[1];
-        ddVehicles.ClearOptions();
-        ddVehicles.AddOptions(listName);
-
-        ddMaps = ddList[2];
-        ddMaps.ClearOptions();
-        ddMaps.AddOptions(listMapNames);
-        gameManager.SelectedMapIndex = ddMaps.value;
-
-        ddGhosts = ddList[0];
-        InitialiseDDGhosts();
-
-        apiController.GetTimeFromAPI(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, null);
-        apiController.GetTimeFromAPI(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, gameManager.UserName);
-
-        SpawnVehicle();
     }
     #endregion
 
     #region Private Methods
 
-    private void SpawnVehicle()
-    {
-        int vehicleIndex = ddVehicles.value;
-        gameManager.SelectedVehicleIndex = vehicleIndex;
-
-        if (spawnedVehicle != null)
-        {
-            Destroy(spawnedVehicle);
-        }
-        spawnedVehicle = Instantiate(this.gameManager.SelectedVehiclePrefab, spawnVehicleTransform.position, spawnVehicleTransform.rotation);
-    }
-
     private void PBIsUpdated()
     {
         isPBNotNull = apiController.Pb.rank != "-1";
-        InitialiseDDGhosts();
+        //InitialiseDDGhosts();
     }
 
     private void WRIsUpdated()
     {
         isWRNotNull = apiController.Wr.rank != "-1";
-        InitialiseDDGhosts();
+        //InitialiseDDGhosts();
     }
 
     private void InitialiseDDGhosts()
     {
-        ddGhosts.ClearOptions();
+        //ddGhosts.ClearOptions();
         List<string> listNames = new List<string>();
         if (isPBNotNull)
         {
@@ -109,43 +96,63 @@ public class SelectionMenuManager : MonoBehaviour
 
         if (listNames.Count > 0)
         {
-            ddGhosts.AddOptions(listNames);
+            //ddGhosts.AddOptions(listNames);
             gameManager.GhostType = ddGhosts.options[ddGhosts.value].text;
         }
 
-        cbIsGhost.interactable = listNames.Count > 0;
-        ddGhosts.interactable = listNames.Count > 0;
-        cbIsGhost.isOn = false;
+        //cbIsGhost.interactable = listNames.Count > 0;
+        //ddGhosts.interactable = listNames.Count > 0;
+        //cbIsGhost.isOn = false;
     }
 
     #endregion
 
     #region Public Methods
 
-    public void VehicleDropdownValueChanged()
-    {
-        SpawnVehicle();
-        apiController.GetTimeFromAPI(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, null);
-        apiController.GetTimeFromAPI(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, gameManager.UserName);
-    }
-
-    public void MapDropdownValueChanged()
-    {
-        gameManager.SelectedMapIndex = ddMaps.value;
-        apiController.GetTimeFromAPI(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, null);
-        apiController.GetTimeFromAPI(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, gameManager.UserName);
-    }
-
     public void GhostDropdownValueChanged()
     {
         gameManager.GhostType = ddGhosts.options[ddGhosts.value].text;
     }
 
-    public void StartGame()
+    public void SelectCar(int carId)
     {
-        gameManager.IsGhostSelected = GameObject.Find("CbIsGhost").GetComponent<Toggle>().isOn;
-        SceneManager.LoadScene("GameScene");
+        //Faire des sortes de cartes pour les différentes voitures
+        //Appeler cette fonction au clic de la carte et afficher la sélection de map
+
+        gameManager.SelectedVehicleIndex = carId;
+
+        DisplayMapCarSelection(true);
     }
+
+    public void DisplayMapCarSelection(bool isDisplayed)
+    {
+        carSelectionPanel.SetActive(!isDisplayed);
+
+        if (isDisplayed)
+        {
+            //Remove all existing files ?
+            foreach (Transform child in contentPanel)
+            {
+                Destroy(child.gameObject);
+            }
+
+            //Gather all files
+            foreach (string filePath in Directory.GetFiles(_mapPath, "*.json"))
+            {
+                string fileName = Path.GetFileNameWithoutExtension(filePath);
+                GameObject go = Instantiate(mapItem, contentPanel);
+                go.GetComponentInChildren<TMP_Text>().text = fileName;
+            }
+        }
+
+        mapSelectionPanel.SetActive(isDisplayed);
+    }
+
+    //public void StartGame()
+    //{
+    //    gameManager.IsGhostSelected = GameObject.Find("CbIsGhost").GetComponent<Toggle>().isOn;
+    //    SceneManager.LoadScene("GameScene");
+    //}
 
     #endregion
 }

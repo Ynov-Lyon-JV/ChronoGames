@@ -15,21 +15,19 @@ public class LoadMap : MonoBehaviour
     {
         _gameManager = FindObjectOfType<GameManager>();
         _mapName = this.GetComponentInChildren<TMP_Text>().text;
-        Debug.Log(_mapName);
     }
 
     public void Load()
     {
         _gameManager.SelectedMapName = _mapName;
+        _gameManager.SelectedMapId = 500; //Change with real map ID 
         if (isEditor)
         {
             SceneManager.LoadScene("MapEditorScene"); 
         }
         else
         {
-            // Charger la scene de jeu
             SceneManager.LoadScene("GameScene");
         }
-
     }
 }

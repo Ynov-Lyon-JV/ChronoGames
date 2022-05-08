@@ -15,6 +15,7 @@ public class EndRaceManager : MonoBehaviour
 
     private RaceManager raceManager;
     private APIController apiController;
+    private GameManager gameManager;
 
     private GameObject endPanel;
     private TMP_Text txtLastTime;
@@ -28,6 +29,7 @@ public class EndRaceManager : MonoBehaviour
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         raceManager = GameObject.Find("RaceManager").GetComponent<RaceManager>();
         apiController = GameObject.Find("APIManager").GetComponent<APIController>();
         apiController.ApiResponseCodeUpdated += () => UpdateMessage();
@@ -45,8 +47,10 @@ public class EndRaceManager : MonoBehaviour
 
     private void SetPBAndWR()
     {
-        txtWRTime.text = $"World record : {raceManager.WrTime.time}";
-        txtPBTime.text = $"Best time : {raceManager.PbTime.time}";
+        string wrTime = gameManager.SelectedMapId != -5 ? raceManager.WrTime.time : "no time";
+        string pbTime = gameManager.SelectedMapId != -5 ? raceManager.PbTime.time : "no time";
+        txtWRTime.text = $"World record : {wrTime}";
+        txtPBTime.text = $"Best time : {pbTime}";
     }
 
     private void UpdateMessage()

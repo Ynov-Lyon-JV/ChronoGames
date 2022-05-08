@@ -10413,7 +10413,7 @@ GameObject:
   - component: {fileID: 8837888696717794778}
   - component: {fileID: 8837888696717794777}
   m_Layer: 0
-  m_Name: Voiture_Rouge
+  m_Name: Bean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

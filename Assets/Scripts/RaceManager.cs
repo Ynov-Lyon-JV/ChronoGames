@@ -1,6 +1,9 @@
 ﻿using Assets.Scripts;
+using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class RaceManager : MonoBehaviour
@@ -28,17 +31,33 @@ public class RaceManager : MonoBehaviour
     public bool StartRunning { get; private set; }
     private float _speed { get; set; }
     private bool _isCameraRotating { get; set; }
-    private CarCam _camParent;
+    private Camera _camParent;
+    private CarCam _camCar;
     private Vector3 _positionCameraBase;
     private Camera _startingCamera;
     private Camera _endCamera;
-    private GameObject _startingCamParent;
     private GameObject _startPanel;
     private GameObject[] _listCameraSpawn;
     private int _indexListCameraSpawn;
     private float _timerCameraSpawn;
     private GameObject _gameHUD;
     private List<string> _listCheckpointsTime;
+
+    private const string EDITED_CHRONOGAME_FOLDER = "chronogame";
+    private const string EDITED_MAP_FOLDER = "maps";
+    private const string EDITED_EDITED_FOLDER = "edited";
+    private const string JSON_EXTENSION = ".json";
+
+    private string _documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+    private string _editedMapPath;
+    private string _mapName;
+
+    private int _moduleSize = 40;
+    private int _gridSize = 10;
+    [SerializeField]
+    private Transform _mapTransform;
+
+    private MapData _mapData;
 
     #endregion
 
@@ -75,8 +94,10 @@ public class RaceManager : MonoBehaviour
 
         gameManager = FindObjectOfType<GameManager>();
 
-        this.currMap = Instantiate(gameManager.SelectedMapPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
-        currMapScript = currMap.GetComponent<Map>();
+        //Instantiate map from file
+        LoadMapFromFile();
+        currMapScript = _mapTransform.GetComponent<Map>();
+        currMapScript.SetMapDatas();
 
         // Get all camera's spawn for starting animation 
         _listCameraSpawn = GameObject.FindGameObjectsWithTag("CameraSpawn");
@@ -88,7 +109,6 @@ public class RaceManager : MonoBehaviour
 
         displayScript.CountdownFinished += () => currVehicle.GetComponent<VehicleController>().enabled = true;
         currMapScript.EndRace += () => EndRaceWorkflow();
-        currMapScript.EndLap += () => EndLapWorkflow();
         currMapScript.CheckPointTimer += () => CheckPointTimerWorkflow();
 
         displayScript.UpdateLapData(currMapScript.CurrentLap.ToString(), currMapScript.TotLap.ToString());
@@ -96,6 +116,7 @@ public class RaceManager : MonoBehaviour
         RetrievePBAndWR();
         _endCamera = GameObject.Find("EndCamera").GetComponent<Camera>();
         _startingCamera = GameObject.Find("StartingCamera")?.GetComponent<Camera>();
+        _startingCamera.enabled = true;
         if (_endCamera != null)
         {
             _endCamera.enabled = false;
@@ -140,13 +161,13 @@ public class RaceManager : MonoBehaviour
         _startPanel.SetActive(false);
         _startingCamera.enabled = false;
 
-        _camParent.GetComponent<CarCam>().enabled = true;
+        _camParent.enabled = true;
+        _camCar.GetComponent<CarCam>().enabled = true;
 
         if (_gameHUD != null)
         {
             _gameHUD.SetActive(true);
         }
-        //_camParent.SetActive(true);
     }
 
 
@@ -156,11 +177,11 @@ public class RaceManager : MonoBehaviour
     /// </summary>
     private void AnimationCameraBeforeStart()
     {
-        if(_startingCamera != null && _isCameraRotating)
+        if (_startingCamera != null && _isCameraRotating)
         {
             _startingCamera.transform.eulerAngles += new Vector3(0, _speed * Time.deltaTime, 0);
-        } 
-        else if(_startingCamera != null && _isCameraRotating == false)
+        }
+        else if (_startingCamera != null && _isCameraRotating == false)
         {
             _startingCamera.transform.position = _positionCameraBase;
         }
@@ -170,23 +191,24 @@ public class RaceManager : MonoBehaviour
     {
         _timerCameraSpawn += Time.deltaTime;
 
-        if(_timerCameraSpawn >= 5.0f && _listCameraSpawn.Length > 0)
+        if (_timerCameraSpawn >= 5.0f && _listCameraSpawn.Length > 0)
         {
             GetNextCameraSpawn();
             _startingCamera.transform.position = _listCameraSpawn[_indexListCameraSpawn].transform.position;
             _startingCamera.transform.rotation = _listCameraSpawn[_indexListCameraSpawn].transform.rotation;
             _timerCameraSpawn = 0;
-        } 
+        }
     }
 
     private void GetNextCameraSpawn()
     {
-        if(_indexListCameraSpawn >= _listCameraSpawn.Length - 1)
+        if (_indexListCameraSpawn >= _listCameraSpawn.Length - 1)
         {
             _indexListCameraSpawn = 0;
-        } else
+        }
+        else
         {
-            _indexListCameraSpawn ++;
+            _indexListCameraSpawn++;
         }
     }
 
@@ -198,9 +220,10 @@ public class RaceManager : MonoBehaviour
         try
         {
             this.currVehicle = Instantiate(this.gameManager.SelectedVehiclePrefab, currMapScript.StartBlock.transform.position, currMapScript.StartBlock.transform.rotation);
-            _camParent = GameObject.Find("CamParent").GetComponent<CarCam>();
+            _camParent = this.currVehicle.GetComponentInChildren<Camera>();
+            _camParent.enabled = false;
+            _camCar = this.currVehicle.GetComponentInChildren<CarCam>();
             this.currVehicle.GetComponent<Rigidbody>().isKinematic = true;
-            GameObject.Find("Main Camera").GetComponent<Camera>().enabled = true;
 
             if (_startingCamera != null)
             {
@@ -213,11 +236,11 @@ public class RaceManager : MonoBehaviour
                 _startingCamera.transform.rotation = Quaternion.Euler(20, 0, 0);
                 _positionCameraBase = this.currVehicle.transform.position;
 
-              /*  if(_camParent != null)
-                {
-                    _camParent.GetComponent<CarCam>().enabled = false;
-                }*/
-                switchCamera(CameraEnum.StartAnimationCam);
+                /*  if(_camParent != null)
+                  {
+                      _camParent.GetComponent<CarCam>().enabled = false;
+                  }*/
+                //switchCamera(CameraEnum.StartAnimationCam);
 
                 //_startingCamera.enabled = true;
 
@@ -247,21 +270,22 @@ public class RaceManager : MonoBehaviour
 
     private void switchCamera(CameraEnum cameraEnum)
     {
-        switch(cameraEnum)
+        switch (cameraEnum)
         {
             case CameraEnum.StartAnimationCam:
                 _startingCamera.enabled = true;
                 _camParent.enabled = false;
+                //_camCar.enabled = false;
                 _endCamera.enabled = false;
                 break;
             case CameraEnum.CarCam:
                 _startingCamera.enabled = false;
-                _camParent.enabled = true;
+                _camCar.enabled = true;
                 _endCamera.enabled = false;
                 break;
             case CameraEnum.EndCam:
                 _startingCamera.enabled = false;
-                _camParent.enabled = false;
+                _camCar.enabled = false;
                 _endCamera.enabled = true;
                 break;
         }
@@ -286,7 +310,8 @@ public class RaceManager : MonoBehaviour
 
         if (endCamera != null)
         {
-            _camParent.GetComponent<CarCam>().enabled = false;
+            _camParent.enabled = false;
+            _camCar.GetComponent<CarCam>().enabled = false;
             endCamera.enabled = true;
         }
 
@@ -296,15 +321,7 @@ public class RaceManager : MonoBehaviour
         endRaceManager.SetLastTime();
         endPanelPanelOpener.OpenClosePanel();
         byte[] file = ghostManager.SaveToByteArray();
-        apiController.SendTimeToApi(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, displayScript.CurrTime, file);
-    }
-
-    /// <summary>
-    /// Function called when the lap ends
-    /// </summary>
-    private void EndLapWorkflow()
-    {
-        displayScript.UpdateLapData(currMapScript.CurrentLap.ToString(), currMapScript.TotLap.ToString());
+        //apiController.SendTimeToApi(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, displayScript.CurrTime, file);
     }
 
     /// <summary>
@@ -312,15 +329,22 @@ public class RaceManager : MonoBehaviour
     /// </summary>
     private void CheckPointTimerWorkflow()
     {
-       string checkpointTime = displayScript.UpdateCheckPointLapTime(_listCheckpointsTime.Count );
+        string checkpointTime = displayScript.UpdateCheckPointLapTime(_listCheckpointsTime.Count);
 
         _listCheckpointsTime.Add(checkpointTime);
     }
 
     private void RetrievePBAndWR()
     {
-        apiController.GetTimeFromAPI(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, null);
-        apiController.GetTimeFromAPI(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, gameManager.UserName);
+        if (gameManager.SelectedMapId != -5)
+        {
+            apiController.GetTimeFromAPI(gameManager.SelectedMapId, gameManager.SelectedVehicleIndex + 1, null);
+            apiController.GetTimeFromAPI(gameManager.SelectedMapId, gameManager.SelectedVehicleIndex + 1, gameManager.UserName); 
+        }
+        else
+        {
+            InitialiseRace();
+        }
     }
 
     private void UpdatePB()
@@ -369,6 +393,38 @@ public class RaceManager : MonoBehaviour
     {
         GhostData ghostData = ghostManager.LoadFromByteArray(data);
         SpawnVehicle(ghostData);
+    }
+
+    private void LoadMapFromFile()
+    {
+        _mapName = gameManager.SelectedMapName;
+        _editedMapPath = Path.Combine(_documentPath, EDITED_CHRONOGAME_FOLDER, EDITED_MAP_FOLDER, EDITED_EDITED_FOLDER);
+
+        string finalPath = Path.Combine(_editedMapPath, _mapName + JSON_EXTENSION);
+
+        string json = File.ReadAllText(finalPath);
+        _mapData = JsonConvert.DeserializeObject<MapData>(json);
+        gameManager.SelectedMapId = _mapData.Index;
+
+        this.InstantiateMap(_mapData.ListObjectInfos);
+    }
+
+    private void InstantiateMap(List<ObjectInfo> infos)
+    {
+        foreach (ObjectInfo i in infos)
+        {
+            Vector3 pos = new Vector3(i.RankX * _moduleSize + _moduleSize / 2, 0.0f, i.RankZ * _moduleSize + _moduleSize / 2);
+
+            Module module = Instantiate(gameManager.Modules[i.Id], pos, Quaternion.identity, _mapTransform).GetComponent<Module>();
+            module.transform.rotation *= Quaternion.Euler(0, i.Rotation, 0);
+
+            Module[,] isPosTaken = new Module[_gridSize, _gridSize];
+            isPosTaken[i.RankX, i.RankZ] = module;
+
+            module.GetComponent<ObjectData>().RankX = i.RankX;
+            module.GetComponent<ObjectData>().RankZ = i.RankZ;
+            module.GetComponent<ObjectData>().Rotation = i.Rotation;
+        }
     }
 
     #endregion

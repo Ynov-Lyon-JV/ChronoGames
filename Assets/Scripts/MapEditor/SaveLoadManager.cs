@@ -18,9 +18,13 @@ public class SaveLoadManager : MonoBehaviour
 
     private ModuleManager _moduleManager;
 
+    private bool _isMapValidated;
+
     public Transform savePanel;
     public Transform fileAlreadyExistsPanel;
     public TMP_InputField mapNameSave;
+
+    public bool IsMapValidated { get => _isMapValidated; set => _isMapValidated = value; }
 
     private void Start()
     {
@@ -75,11 +79,15 @@ public class SaveLoadManager : MonoBehaviour
             mapData.ListObjectInfos.Add(info);
         }
 
+        mapData.Index = -5;
+        mapData.Validated = _isMapValidated;
+
         string jsonString = JsonConvert.SerializeObject(mapData);
         File.WriteAllText(_finalPath, jsonString);
 
         _moduleManager.enabled = true;
         savePanel.gameObject.SetActive(false);
+        fileAlreadyExistsPanel.gameObject.SetActive(false);
     }
 
     public void CancelFileAlreadyExists()
@@ -101,6 +109,8 @@ public class SaveLoadManager : MonoBehaviour
 
         string json = File.ReadAllText(_finalPath);
         MapData data = JsonConvert.DeserializeObject<MapData>(json);
+
+        IsMapValidated = data.Validated;
 
         _moduleManager.InstantiateMap(data.ListObjectInfos);
         _moduleManager.enabled = true;

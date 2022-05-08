@@ -12,14 +12,12 @@ public class GameManager : MonoBehaviour
 
     //Selection
     [SerializeField] private List<GameObject> vehicles;
-    [SerializeField] private List<GameObject> maps;
     [SerializeField] private List<GameObject> modules;
 
     private int selectedVehicleIndex;
     private GameObject selectedVehiclePrefab;
-    private int selectedMapIndex;
-    private GameObject selectedMapPrefab;
     private string selectedMapName;
+    private int selectedMapId;
 
     //Connectivity
     private bool isConnectedToInternet = false;
@@ -40,13 +38,11 @@ public class GameManager : MonoBehaviour
 
     //Selection
     public List<GameObject> Vehicles { get => vehicles; }
-    public List<GameObject> Maps { get => maps; }
     public List<GameObject> Modules { get => modules; }
     public GameObject SelectedVehiclePrefab { get => selectedVehiclePrefab; }
-    public GameObject SelectedMapPrefab { get => selectedMapPrefab; }
     public int SelectedVehicleIndex { get => selectedVehicleIndex; set => SetVehicleIndexAndPrefab(value); }
-    public int SelectedMapIndex { get => selectedMapIndex; set => SetMapIndexAndPrefab(value); }
     public string SelectedMapName { get => selectedMapName; set => selectedMapName = value; }
+    public int SelectedMapId { get => selectedMapId; set => selectedMapId = value; }
 
     //Connectivity
     public bool IsConnectedToInternet { get => isConnectedToInternet; set => isConnectedToInternet = value; }
@@ -93,12 +89,6 @@ public class GameManager : MonoBehaviour
     {
         selectedVehicleIndex = _value;
         selectedVehiclePrefab = vehicles[_value];
-    }
-
-    private void SetMapIndexAndPrefab(int _value)
-    {
-        selectedMapIndex = _value;
-        selectedMapPrefab = maps[_value];
     }
 
     private bool CheckToken()

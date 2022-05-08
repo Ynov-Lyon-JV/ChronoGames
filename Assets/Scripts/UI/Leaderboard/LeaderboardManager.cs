@@ -46,20 +46,10 @@ public class LeaderboardManager : MonoBehaviour
             listVehicleNames.Add(vehicle.name);
         }
 
-        List<string> listMapNames = new List<string>();
-        foreach (GameObject map in gameManager.Maps)
-        {
-            listMapNames.Add(map.name);
-        }
-
         TMP_Dropdown[] ddList = GetComponentsInChildren<TMP_Dropdown>();
         ddVehicles = ddList[1];
         ddVehicles.ClearOptions();
         ddVehicles.AddOptions(listVehicleNames);
-
-        ddMaps = ddList[0];
-        ddMaps.ClearOptions();
-        ddMaps.AddOptions(listMapNames);
     }
 
     #endregion

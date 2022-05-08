@@ -27,6 +27,8 @@ public class ModuleManager : MonoBehaviour
 
     [SerializeField]
     private LayerMask _layerMask;
+    [SerializeField]
+    private Transform _mapTransform;
 
     public GameObject SelectedPrefab { get => _selectedPrefab; set => _selectedPrefab = value; }
     public bool IsDeleteMode { get => _isDeleteMode; set => _isDeleteMode = value; }
@@ -75,7 +77,7 @@ public class ModuleManager : MonoBehaviour
                             _selectedPrefab.transform.Find("EndCamera").GetComponent<Camera>().enabled = false;
                         }
 
-                        _module = Instantiate(_selectedPrefab, position, _moduleRot).GetComponent<Module>();
+                        _module = Instantiate(_selectedPrefab, position, _moduleRot, _mapTransform).GetComponent<Module>();
                     }
 
                     _module.transform.position = new Vector3(position.x, 0, position.z);
@@ -223,7 +225,7 @@ public class ModuleManager : MonoBehaviour
         {
             Vector3 pos = new Vector3(i.RankX * _moduleSize + _moduleSize / 2, 0.0f, i.RankZ * _moduleSize + _moduleSize / 2);
 
-            Module module = Instantiate(_gameManager.Modules[i.Id], pos, Quaternion.identity).GetComponent<Module>();
+            Module module = Instantiate(_gameManager.Modules[i.Id], pos, Quaternion.identity, _mapTransform).GetComponent<Module>();
             module.transform.rotation *= Quaternion.Euler(0, i.Rotation, 0);
 
             _isPosTaken[i.RankX, i.RankZ] = module;

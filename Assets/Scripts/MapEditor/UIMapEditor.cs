@@ -58,5 +58,8 @@ public class UIMapEditor : MonoBehaviour
         {
             moduleManager.IsDeleteMode = false;
         }
+
+
+        _mapValidator.StartValidation();
     }
 }
