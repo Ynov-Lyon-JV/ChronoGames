@@ -12,7 +12,7 @@ public class OnlineStatusDisplay : MonoBehaviour
     private GameManager gameManager;
     private Image OnlineStatusImage;
     private TextMeshProUGUI OnlineStatusText;
-    private Button OnlineStatusButton;
+    //private Button OnlineStatusButton;
 
     #endregion
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class OnlineStatusDisplay : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         OnlineStatusImage = this.GetComponentInChildren<Image>();
         OnlineStatusText = this.GetComponentInChildren<TextMeshProUGUI>();
-        OnlineStatusButton = this.GetComponentInChildren<Button>();
+        //OnlineStatusButton = this.GetComponentInChildren<Button>();
 
         UpdateOnlineStatus();
     }
@@ -34,13 +34,13 @@ public class OnlineStatusDisplay : MonoBehaviour
         {
             OnlineStatusImage.color = new Color(0.1137255f, 0.6313726f, 0);
             OnlineStatusText.text = $"Online ({gameManager.UserName})";
-            OnlineStatusButton.interactable = false;
+            //OnlineStatusButton.interactable = false;
         }
         else
         {
-            OnlineStatusImage.color = new Color(0.6313726f, 0, 0);
-            OnlineStatusText.text = "Offline";
-            OnlineStatusButton.interactable = true;
+            //OnlineStatusImage.color = new Color(0.6313726f, 0, 0);
+            //OnlineStatusText.text = "Offline";
+            //OnlineStatusButton.interactable = true;
         }
     }
     

@@ -27,6 +27,10 @@ MonoBehaviour:
     m_Key: Label ghost
     m_Metadata:
       m_Items: []
+  - m_Id: 52611093409685504
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
