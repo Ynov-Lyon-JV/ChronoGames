@@ -17,18 +17,6 @@ public class UIMapEditor : MonoBehaviour
         _gameManager = FindObjectOfType<GameManager>();
     }
 
-    void Update()
-    {
-        if (moduleManager.NbStartModule > 0 && moduleManager.NbFinishModule > 0)
-        {
-            validateButton.interactable = true;
-        }
-        else
-        {
-            validateButton.interactable = false;
-        }
-    }
-
     public void SelectModule(int moduleIndex)
     {
         if (moduleManager.SelectedPrefab != null)
