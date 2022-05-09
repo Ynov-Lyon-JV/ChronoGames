@@ -24,6 +24,13 @@ public class MapValidator : MonoBehaviour
     {
         _loadManager = FindObjectOfType<SaveLoadManager>();
     }
+    private void Update()
+    {
+        if (_fanwickTransform != null && Input.GetKeyDown(KeyCode.Backspace))
+        {
+            StopValidation();
+        }
+    }
 
     public void StartValidation()
     {
@@ -54,6 +61,18 @@ public class MapValidator : MonoBehaviour
         _fanwickTransform.GetComponentInChildren<Camera>().enabled = false;
         _fanwickTransform.GetComponentInChildren<CarCam>().enabled = false;
 
-        //GameObject.Destroy(_fanwickTransform.gameObject);
+
+    }
+
+    private void StopValidation()
+    {
+        cam.enabled = true;
+        ui.SetActive(true);
+
+        GameObject.Destroy(_fanwickTransform.gameObject);
+
+        //_fanwickTransform.GetComponentInChildren<VehicleController>().enabled = false;
+        //_fanwickTransform.GetComponentInChildren<Camera>().enabled = false;
+        //_fanwickTransform.GetComponentInChildren<CarCam>().enabled = false;
     }
 }
