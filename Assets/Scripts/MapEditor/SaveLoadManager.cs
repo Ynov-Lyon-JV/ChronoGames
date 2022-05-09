@@ -61,6 +61,10 @@ public class SaveLoadManager : MonoBehaviour
             //Prompt "File already existing"
             fileAlreadyExistsPanel.gameObject.SetActive(true);
         }
+        else
+        {
+            ValidateSave();
+        }
     }
 
     public void ValidateSave()

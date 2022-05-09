@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class DisplayData : MonoBehaviour
     [SerializeField] private Text timerText;
     [SerializeField] private Text countdownText;
     [SerializeField] private Text lapDataText;
-    [SerializeField] private Text CheckPointLapTimeText;
+    [SerializeField] private TMP_Text CheckPointLapTimeText;
     [SerializeField] private Text speedText;
     [SerializeField] private Text gearText;
     [SerializeField] private Image RPMBar;

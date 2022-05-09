@@ -321,7 +321,8 @@ public class RaceManager : MonoBehaviour
         endRaceManager.SetLastTime();
         endPanelPanelOpener.OpenClosePanel();
         byte[] file = ghostManager.SaveToByteArray();
-        //apiController.SendTimeToApi(gameManager.SelectedMapIndex + 1, gameManager.SelectedVehicleIndex + 1, displayScript.CurrTime, file);
+
+        apiController.SendTimeToApi(gameManager.SelectedMapId, gameManager.SelectedVehicleIndex + 1, displayScript.CurrTime, file);
     }
 
     /// <summary>
