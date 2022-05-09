@@ -47,7 +47,11 @@ public class UIMapEditor : MonoBehaviour
             moduleManager.IsDeleteMode = false;
         }
 
-
         _mapValidator.StartValidation();
+    }
+
+    public void DisplayHelp()
+    {
+        Debug.Log("HELP");
     }
 }

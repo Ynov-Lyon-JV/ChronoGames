@@ -4727,6 +4727,7 @@ MonoBehaviour:
   displayScript: {fileID: 1758987780}
   ghostPrefab: {fileID: 2259002444071133010, guid: b4c28bb338d9aaf49b41462cefc0cb11,
     type: 3}
+  gridSize: 15
   _mapTransform: {fileID: 1770968076}
 --- !u!4 &1823899678
 Transform:

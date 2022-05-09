@@ -157,9 +157,9 @@ public class DisplayData : MonoBehaviour
         gearText.text = isReverse ? "R" : (gearNum + 1).ToString();
     }
 
-    public void UpdateRPM(float rpm)
+    public void UpdateRPM(float rpm, float maxRpm)
     {
-        RPMBar.fillAmount = rpm / 5000f;
+        RPMBar.fillAmount = rpm / maxRpm;
     }
     #endregion
 }

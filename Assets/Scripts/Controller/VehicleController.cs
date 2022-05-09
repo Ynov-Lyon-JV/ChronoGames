@@ -47,14 +47,14 @@ public class VehicleController : MonoBehaviour
     public AnimationCurve CoefRotationOverSpeed;
     public float CoefRotation;
     [HideInInspector] public float wheelsRPM;
-    [HideInInspector] public float engineRPM;
+    public float engineRPM;
     public bool isReverse = false;
     [SerializeField] private DriveType driveType;
     [SerializeField] private GearboxType gearboxType;
     [HideInInspector] public float totalPower;
     public float[] gears;
     public float[] gearChangeSpeed;
-    [HideInInspector] public int gearNum;
+    public int gearNum;
     public AnimationCurve enginePower;
 
     private WheelFrictionCurve forwardFriction, sidewaysFriction;
@@ -104,7 +104,7 @@ public class VehicleController : MonoBehaviour
     {
         GetObjects();
         StartCoroutine(TimedLoop());
-        if (SceneManager.GetActiveScene().name != "MapEditorScene")
+        if (SceneManager.GetActiveScene().name != "MapEditorScene" && SceneManager.GetActiveScene().name != "Test")
         {
             raceManager = GameObject.Find("RaceManager").GetComponent<RaceManager>(); 
         }
@@ -315,9 +315,9 @@ public class VehicleController : MonoBehaviour
         }
         else
         {
-            engineRPM = Mathf.SmoothDamp(engineRPM, 1000 + (Mathf.Abs(wheelsRPM) * 3.6f * (gears[gearNum])), ref velocity, smoothTime);
+            engineRPM = Mathf.SmoothDamp(engineRPM, minRPM - 100 + (Mathf.Abs(wheelsRPM) * 3.6f * (gears[gearNum])), ref velocity, smoothTime);
         }
-        engineRPM = Mathf.Clamp(engineRPM, 0, maxRPM);
+        engineRPM = Mathf.Clamp(engineRPM, 0, maxRPM + 100);
 
         MoveVehicle();
         ShifterPro();

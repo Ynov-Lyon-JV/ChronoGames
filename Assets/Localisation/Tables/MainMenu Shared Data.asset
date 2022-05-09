@@ -71,6 +71,10 @@ MonoBehaviour:
     m_Key: "YesText\t"
     m_Metadata:
       m_Items: []
+  - m_Id: 67743608411643904
+    m_Key: FolderText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

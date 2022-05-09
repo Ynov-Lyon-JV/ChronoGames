@@ -53,7 +53,7 @@ public class RaceManager : MonoBehaviour
     private string _mapName;
 
     private int _moduleSize = 40;
-    private int _gridSize = 10;
+    public int gridSize = 10;
     [SerializeField]
     private Transform _mapTransform;
 
@@ -144,7 +144,7 @@ public class RaceManager : MonoBehaviour
             }
             displayScript.UpdateSpeed(currVehicle.GetComponent<VehicleController>().kph);
             displayScript.UpdateGear(currVehicle.GetComponent<VehicleController>().isReverse, currVehicle.GetComponent<VehicleController>().gearNum);
-            displayScript.UpdateRPM(currVehicle.GetComponent<VehicleController>().engineRPM);
+            displayScript.UpdateRPM(currVehicle.GetComponent<VehicleController>().engineRPM, currVehicle.GetComponent<VehicleController>().maxRPM);
         }
     }
     #endregion
@@ -419,7 +419,7 @@ public class RaceManager : MonoBehaviour
             Module module = Instantiate(gameManager.Modules[i.Id], pos, Quaternion.identity, _mapTransform).GetComponent<Module>();
             module.transform.rotation *= Quaternion.Euler(0, i.Rotation, 0);
 
-            Module[,] isPosTaken = new Module[_gridSize, _gridSize];
+            Module[,] isPosTaken = new Module[gridSize, gridSize];
             isPosTaken[i.RankX, i.RankZ] = module;
 
             module.GetComponent<ObjectData>().RankX = i.RankX;

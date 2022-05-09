@@ -9,6 +9,7 @@ public class PauseManager : MonoBehaviour
     #region Fields
 
     private RaceManager raceManager;
+    private GameManager gameManager;
 
     private bool isPaused = false;
     private GameObject pausePanel;
@@ -32,6 +33,7 @@ public class PauseManager : MonoBehaviour
     void Start()
     {
         raceManager = GameObject.Find("RaceManager").GetComponent<RaceManager>();
+        gameManager = FindObjectOfType<GameManager>();
 
         pausePanel = GameObject.Find("PausePanel");
         pausePanelOpener = pausePanel.GetComponent<PanelOpener>();
@@ -58,8 +60,13 @@ public class PauseManager : MonoBehaviour
     {
         if (!isSet)
         {
-            txtWRTime.text = $"World record : {raceManager.WrTime.time}";
-            txtPBTime.text = $"Best time : {raceManager.PbTime.time}";
+            if (gameManager.SelectedMapId != -5)
+            {
+                string wrTime = gameManager.SelectedMapId != -5 ? raceManager.WrTime.time : "no time";
+                string pbTime = gameManager.SelectedMapId != -5 ? raceManager.PbTime.time : "no time";
+                txtWRTime.text = $"World record : {wrTime}";
+                txtPBTime.text = $"Best time : {pbTime}";
+            }
             isSet = true;
         }
     }

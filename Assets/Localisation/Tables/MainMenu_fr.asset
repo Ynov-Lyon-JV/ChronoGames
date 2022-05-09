@@ -74,5 +74,9 @@ MonoBehaviour:
     m_Localized: Oui
     m_Metadata:
       m_Items: []
+  - m_Id: 67743608411643904
+    m_Localized: Dossier
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

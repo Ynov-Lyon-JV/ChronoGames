@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using System.IO;
 using System;
+using System.Diagnostics;
 
 public class SelectionMenuManager : MonoBehaviour
 {
@@ -148,11 +149,19 @@ public class SelectionMenuManager : MonoBehaviour
         mapSelectionPanel.SetActive(isDisplayed);
     }
 
-    //public void StartGame()
-    //{
-    //    gameManager.IsGhostSelected = GameObject.Find("CbIsGhost").GetComponent<Toggle>().isOn;
-    //    SceneManager.LoadScene("GameScene");
-    //}
+    public void OpenMapFolder()
+    {
+        if (Directory.Exists(_mapPath))
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                Arguments = _mapPath,
+                FileName = "explorer.exe"
+            };
+
+            Process.Start(startInfo);
+        };
+    }
 
     #endregion
 }
