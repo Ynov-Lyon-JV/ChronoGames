@@ -6,6 +6,8 @@ public class UIMenu : MonoBehaviour
     private SaveLoadManager _slmanager;
     private ModuleManager _moduleManager;
 
+    public Transform helpPanel;
+
     private void Start()
     {
         _slmanager = FindObjectOfType<SaveLoadManager>();
@@ -30,5 +32,10 @@ public class UIMenu : MonoBehaviour
         //Discard current modules and load new ones based on the selected file
         //_moduleManager.ResetPrefab();
         _slmanager.LoadMap();
+    }
+
+    public void DisplayHelp()
+    {
+        helpPanel.gameObject.SetActive(!helpPanel.gameObject.activeSelf);
     }
 }
