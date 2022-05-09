@@ -73,7 +73,7 @@ MonoBehaviour:
   kph: 0
   smoothTime: 0.09
   maxRPM: 2000
-  minRPM: 1000
+  minRPM: 500
   CoefRotationOverSpeed:
     serializedVersion: 2
     m_Curve:

@@ -10525,7 +10525,7 @@ MonoBehaviour:
   kph: 0
   smoothTime: 0.01
   maxRPM: 5000
-  minRPM: 3500
+  minRPM: 1000
   CoefRotationOverSpeed:
     serializedVersion: 2
     m_Curve:
@@ -10600,8 +10600,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.41134235
     - serializedVersion: 3
-      time: 5096.465
-      value: 1000.18933
+      time: 5117.7656
+      value: 998.4328
       inSlope: 0.0012315077
       outSlope: 0.0012315077
       tangentMode: 0
